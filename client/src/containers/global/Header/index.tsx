@@ -4,6 +4,11 @@ import { useState } from 'react';
 import AuthenticationModal from './AuthenticationModal';
 
 const useStyles = makeStyles({
+  root: {
+    position: 'sticky',
+    top: 0,
+    zIndex: 100,
+  },
   logo: {
     width: 50,
   },
@@ -23,7 +28,7 @@ export default function Header() {
 
   return (
     <>
-      <Paper>
+      <Paper className={classes.root}>
         <Box
           display="flex"
           justifyContent="space-between"
