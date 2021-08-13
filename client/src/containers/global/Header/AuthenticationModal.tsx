@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
   content: {
     width: '40vw',
-    height: '50vh',
+    minHeight: '50vh',
     position: 'relative',
   },
   title: {
@@ -28,6 +28,7 @@ const useStyles = makeStyles({
   },
   submitBtn: {
     minWidth: 150,
+    color: '#fff',
   },
   divider: {
     width: '50%',
