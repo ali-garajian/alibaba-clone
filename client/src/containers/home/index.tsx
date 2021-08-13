@@ -1,3 +1,9 @@
+import Banner from './layouts/Banner';
+
 export default function HomePage() {
-  return <h1>home page</h1>;
+  return (
+    <>
+      <Banner />
+    </>
+  );
 }

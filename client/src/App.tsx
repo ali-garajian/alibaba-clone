@@ -9,6 +9,7 @@ const useStyles = makeStyles({
       margin: 0,
       '& *': {
         fontFamily: 'IRANSans !important',
+        boxSizing: 'border-box',
       },
     },
   },
