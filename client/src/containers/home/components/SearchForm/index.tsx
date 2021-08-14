@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Box, makeStyles, Button } from '@material-ui/core';
+import shallow from 'zustand/shallow';
+import clsx from 'clsx';
 
 import FlightType, { EFlightType } from './FlightType';
 import LocationSelectBox from './LocationSelectBox';
@@ -7,6 +9,7 @@ import { IdTitleModel } from 'types/base/IdTitleModel';
 import { cities } from 'containers/home/utils/dummy_data';
 import DateBox from './DateBox';
 import PassengerPickerBox, { IPassengers } from './PassengerPickerBox';
+import useStore, { RootState } from 'data/Store';
 
 const useStyles = makeStyles({
   root: {
@@ -29,25 +32,47 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SearchForm() {
+const searchOptionsSelector = (state: RootState) =>
+  [
+    state.flightType,
+    state.setFlightType,
+    state.source,
+    state.setSource,
+    state.destination,
+    state.setDestination,
+    state.startDate,
+    state.setStartDate,
+    state.endDate,
+    state.setEndDate,
+    state.passengers,
+    state.setPassengers,
+  ] as const;
+
+interface ISearchFormProps {
+  classes?: Partial<ReturnType<typeof useStyles>>;
+}
+export default function SearchForm({
+  classes: externalClasses,
+}: ISearchFormProps) {
   const classes = useStyles();
 
-  const [flightType, setFlightType] = useState<EFlightType>(EFlightType.OneWay);
-
-  const [source, setSource] = useState<IdTitleModel>(cities[0]);
-  const [destination, setDestination] = useState<IdTitleModel>(cities[1]);
-
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [endDate, setEndDate] = useState<Date | null>(null);
-
-  const [passengers, setPassengers] = useState<IPassengers>({
-    adult: 1,
-    child: 0,
-    infant: 0,
-  });
+  const [
+    flightType,
+    setFlightType,
+    source,
+    setSource,
+    destination,
+    setDestination,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    passengers,
+    setPassengers,
+  ] = useStore(searchOptionsSelector, shallow);
 
   return (
-    <Box className={classes.root}>
+    <Box className={clsx(externalClasses?.root, classes.root)}>
       <Box maxWidth="1200px" m="20px auto">
         <FlightType
           flightType={flightType}
