@@ -80,7 +80,7 @@ function SearchFormRibbon({}: ISearchFormRibbonProps) {
   const classes = useStyles();
 
   return (
-    <div style={{ height: 300 }}>
+    <>
       <Box
         display="flex"
         alignItems="center"
@@ -112,7 +112,7 @@ function SearchFormRibbon({}: ISearchFormRibbonProps) {
           />
         </Box>
       </Collapse>
-    </div>
+    </>
   );
 }
 
