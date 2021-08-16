@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import SearchFormRibbon from './layouts/SearchFormRibbon';
 import DateCarousel from './layouts/DateCarousel';
 import Sorting from './layouts/Sorting';
+import TicketList from './layouts/TicketList';
 
 export default function TicketListPage() {
   return (
@@ -17,6 +18,7 @@ export default function TicketListPage() {
             <Grid item xs={12} lg={8}>
               <DateCarousel />
               <Sorting />
+              <TicketList />
             </Grid>
           </Grid>
         </Box>

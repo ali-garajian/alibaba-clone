@@ -12,6 +12,11 @@ const theme = createTheme({
         color: '#fff',
       },
     },
+    MuiButton: {
+      containedPrimary: {
+        color: '#fff',
+      },
+    },
   },
   direction: 'rtl',
 });
