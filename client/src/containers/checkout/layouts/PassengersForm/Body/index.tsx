@@ -48,7 +48,12 @@ function PassengersFormBody({
   }>({ value: false });
 
   const onSubmit: SubmitHandler<IPassengersForm> = async (data) => {
-    if (!termsAndConditionsChecked.value) return;
+    if (!termsAndConditionsChecked.value) {
+      return setTermsAndConditionsChecked({
+        value: false,
+        error: 'پذیرفتن قوانین الزامی است',
+      });
+    }
     console.log('data: ', data);
   };
 
