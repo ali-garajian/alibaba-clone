@@ -4,10 +4,12 @@ import {
   Add as AddIcon,
 } from '@material-ui/icons';
 import shallow from 'zustand/shallow';
+import { UseFieldArrayReturn } from 'react-hook-form';
 
 import { ISearchOptionsSlice } from 'data/SearchOptions';
 import useStore from 'data/Store';
 import { IPassengers } from 'containers/home/components/SearchForm/PassengerPickerBox';
+import { IPassengersForm } from '.';
 
 const useStyles = makeStyles((theme: Theme) => ({
   icon: {
@@ -35,8 +37,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 const passengersSelector = (state: ISearchOptionsSlice) =>
   [state.passengers, state.setPassengers] as const;
 
-interface IPassengersFormHeaderProps {}
-function PassengersFormHeader({}: IPassengersFormHeaderProps) {
+interface IPassengersFormHeaderProps
+  extends Partial<UseFieldArrayReturn<IPassengersForm, 'passengers', 'id'>> {}
+function PassengersFormHeader({ append }: IPassengersFormHeaderProps) {
   const classes = useStyles();
   const [passengers, setPassengers] = useStore(passengersSelector, shallow);
 
@@ -58,6 +61,11 @@ function PassengersFormHeader({}: IPassengersFormHeaderProps) {
               title="بزرگسالان"
               category="adult"
               setPassengers={setPassengers}
+              onAfterSetPassenger={() => {
+                append?.({
+                  type: 'adult',
+                });
+              }}
             />
           </Grid>
           <Grid item xs={4}>
@@ -69,6 +77,11 @@ function PassengersFormHeader({}: IPassengersFormHeaderProps) {
               disabled={
                 passengers.child + passengers.infant >= passengers.adult
               }
+              onAfterSetPassenger={() => {
+                append?.({
+                  type: 'child',
+                });
+              }}
             />
           </Grid>
           <Grid item xs={4}>
@@ -80,6 +93,11 @@ function PassengersFormHeader({}: IPassengersFormHeaderProps) {
               disabled={
                 passengers.child + passengers.infant >= passengers.adult
               }
+              onAfterSetPassenger={() => {
+                append?.({
+                  type: 'infant',
+                });
+              }}
             />
           </Grid>
         </Grid>
@@ -94,6 +112,7 @@ interface IPassengerCount {
   category: keyof IPassengers;
   setPassengers: React.Dispatch<React.SetStateAction<IPassengers>>;
   disabled?: boolean;
+  onAfterSetPassenger?: VoidFunction;
 }
 function PassengerCount({
   count,
@@ -101,6 +120,7 @@ function PassengerCount({
   title,
   category,
   disabled,
+  onAfterSetPassenger,
 }: IPassengerCount) {
   const classes = useStyles();
 
@@ -122,12 +142,13 @@ function PassengerCount({
             variant="contained"
             color="primary"
             disabled={disabled}
-            onClick={() =>
+            onClick={() => {
               setPassengers((prev) => ({
                 ...prev,
                 [category]: prev[category] + 1,
-              }))
-            }
+              }));
+              onAfterSetPassenger?.();
+            }}
           >
             <AddIcon />
           </Button>
