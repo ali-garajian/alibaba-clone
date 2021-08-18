@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import {
-  Box,
   makeStyles,
   RadioGroup,
   FormControlLabel,
   Radio,
 } from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
 
 const useStyles = makeStyles({
   root: {

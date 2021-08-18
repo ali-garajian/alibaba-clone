@@ -4,7 +4,8 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import SearchFormRibbon from './layouts/SearchFormRibbon';
 import DateCarousel from './layouts/DateCarousel';
-import Sorting from './layouts/Sorting';
+import TicketList from './layouts/TicketList';
+import Filters from './layouts/Filters';
 
 export default function TicketListPage() {
   return (
@@ -13,10 +14,12 @@ export default function TicketListPage() {
       <Container maxWidth="lg">
         <Box mt={2}>
           <Grid container spacing={1}>
-            <Grid item xs={12} lg={4}></Grid>
-            <Grid item xs={12} lg={8}>
+            <Grid item xs={12} lg={3}>
+              <Filters />
+            </Grid>
+            <Grid item xs={12} lg={9}>
               <DateCarousel />
-              <Sorting />
+              <TicketList />
             </Grid>
           </Grid>
         </Box>

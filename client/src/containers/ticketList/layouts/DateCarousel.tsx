@@ -6,7 +6,7 @@ import {
 import clsx from 'clsx';
 import Carousel, { RenderArrowProps } from 'react-elastic-carousel';
 import DateCard from '../components/DateCard';
-import { dummy_dates } from '../utils/dummy_dates';
+import { dummy_dates } from '../../../data/dummy_data/dates';
 
 const useArrowStyles = makeStyles({
   arrowIcon: {

@@ -7,6 +7,7 @@ const useStyles = makeStyles({
   '@global': {
     body: {
       margin: 0,
+      backgroundColor: '#f5f5f5',
       '& *': {
         fontFamily: 'IRANSans !important',
         boxSizing: 'border-box',
