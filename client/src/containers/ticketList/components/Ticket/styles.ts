@@ -109,9 +109,6 @@ const useStyles = makeStyles({
     color: '#aaa',
     lineHeight: 1,
   },
-  selectTicketBtn: {
-    minWidth: 150,
-  },
   leftTickets: {
     fontSize: 10,
   },

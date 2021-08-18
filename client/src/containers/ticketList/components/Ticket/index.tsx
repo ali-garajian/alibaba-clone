@@ -53,9 +53,13 @@ const passengersSelector = (state: ISearchOptionsSlice) => state.passengers;
 
 interface ITicketProps {
   ticket: ITicket;
+  action: React.ReactNode;
+  defaultExpanded?: boolean;
 }
-function Ticket({ ticket }: ITicketProps) {
-  const [showMoreInfo, setShowMoreInfo] = useState<boolean>(false);
+function Ticket({ ticket, action, defaultExpanded }: ITicketProps) {
+  const [showMoreInfo, setShowMoreInfo] = useState<boolean>(
+    defaultExpanded ?? false
+  );
   const passengers = useStore(passengersSelector);
 
   const classes = useStyles();
@@ -129,14 +133,7 @@ function Ticket({ ticket }: ITicketProps) {
                     تکمیل ظرفیت
                   </Typography>
                 </Conditional>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.selectTicketBtn}
-                  disabled={ticket.quantity === 0}
-                >
-                  انتخاب بلیط
-                </Button>
+                {action}
                 <Box mt={1} />
                 <Conditional
                   condition={ticket.quantity > 0 && ticket.quantity <= 10}
@@ -210,14 +207,23 @@ function Ticket({ ticket }: ITicketProps) {
             <Grid item xs={3}>
               <Box px="20px">
                 <Box fontSize={11}>
-                  <TicketCost count={passengers.adult} price={ticket.price} />
+                  <TicketCost
+                    count={passengers.adult}
+                    price={ticket.price}
+                    title="بزرگسال"
+                  />
                   <Conditional condition={!!passengers.child}>
-                    <TicketCost count={passengers.child} price={ticket.price} />
+                    <TicketCost
+                      count={passengers.child}
+                      price={ticket.price}
+                      title="کودک"
+                    />
                   </Conditional>
                   <Conditional condition={!!passengers.infant}>
                     <TicketCost
                       count={passengers.infant}
                       price={ticket.price}
+                      title="نوزاد"
                     />
                   </Conditional>
                   <Box display="flex" mt={1} className={classes.totalPriceCntr}>
