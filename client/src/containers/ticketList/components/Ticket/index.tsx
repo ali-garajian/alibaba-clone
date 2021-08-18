@@ -23,8 +23,12 @@ import useStore from 'data/Store';
 import TicketCost from '../TicketCost';
 
 export enum ETicketType {
-  Systematic = 1,
-  Charters,
+  Systematic = 'systematic',
+  Charters = 'charters',
+}
+export enum EFlightClass {
+  Buisiness = 'Buisiness',
+  Economy = 'Economy',
 }
 export interface ITicket {
   id: string;
@@ -34,7 +38,7 @@ export interface ITicket {
     logo: string;
   };
   airplane: string;
-  class: 'Buisiness' | 'Economic';
+  class: EFlightClass;
   source: IdTitleModel;
   departureDate: Date;
   destination: IdTitleModel;

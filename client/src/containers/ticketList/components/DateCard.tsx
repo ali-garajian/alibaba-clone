@@ -1,7 +1,7 @@
 import { Box, Typography, makeStyles } from '@material-ui/core';
 import { MoneyFormat } from 'utils';
 
-import { IDate } from '../utils/dummy_dates';
+import { IDate } from '../../../data/dummy_data/dates';
 
 const useStyles = makeStyles({
   date: {
