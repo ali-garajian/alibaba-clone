@@ -1,13 +1,10 @@
 import { addDays, format } from 'date-fns-jalali';
+import { IDate } from 'types/models/Ticket';
 
-export interface IDate {
-  date: string;
-  price: number;
-}
 export const dummy_dates: Array<IDate> = Array.from(
   { length: 50 },
   (_, i) => i
 ).map((index) => ({
-  date: format(addDays(new Date(), index), 'EEEE - d MMMM'),
+  date: addDays(new Date(), index),
   price: Math.round(Math.random() * 2000 + 400),
 }));

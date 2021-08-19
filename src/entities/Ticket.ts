@@ -1,23 +1,12 @@
-import {
-  ITicket,
-  ETicketType,
-  IPassengers,
-} from 'client/src/types/models/Ticket';
-
-// Base Models
-export interface IDate {
-  date: Date;
-  price: number;
-}
+import { ITicket, IPassengers, IDate } from 'client/src/types/models/Ticket';
 
 // GET /tickets
 export interface IGetTicketListQueryParams {
-  flightType: ETicketType;
-  source: number;
-  destination: number;
+  source: string;
+  destination: string;
   departureDate: string;
   returnDate?: string;
-  passengers: IPassengers;
+  passengers: string;
 }
 export interface IGetTicketListResponse {
   dates: Array<IDate>;

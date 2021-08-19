@@ -1,7 +1,8 @@
 import { Box, Typography, makeStyles } from '@material-ui/core';
-import { MoneyFormat } from 'utils';
+import { format } from 'date-fns-jalali';
 
-import { IDate } from '../../../data/dummy_data/dates';
+import { MoneyFormat } from 'utils';
+import { IDate } from 'types/models/Ticket';
 
 const useStyles = makeStyles({
   date: {
@@ -25,7 +26,7 @@ function DateCard({ date }: IDateCardProps) {
   return (
     <Box py={2}>
       <Typography align="center" className={classes.date}>
-        {date.date}
+        {format(date.date, 'EEEE - d MMMM')}
       </Typography>
       <Typography align="center" className={classes.price}>
         {MoneyFormat(date.price)}

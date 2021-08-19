@@ -35,3 +35,20 @@ export interface ITicket {
   price: number;
   quantity: number;
 }
+export interface IDate {
+  date: Date;
+  price: number;
+}
+
+// GET /tickets
+export interface IGetTicketListQueryParams {
+  source: number;
+  destination: number;
+  departureDate: string;
+  returnDate?: string;
+  passengers: IPassengers;
+}
+export interface IGetTicketListResponse {
+  dates: Array<IDate>;
+  tickets: Array<ITicket>;
+}

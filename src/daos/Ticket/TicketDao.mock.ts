@@ -4,22 +4,21 @@ import {
   IGetTicketListQueryParams,
   IGetTicketListResponse,
 } from '@entities/Ticket';
+import { IPassengers } from 'client/src/types/models/Ticket';
 
 class TicketDao extends MockDaoMock implements ITicketDao {
   public async getTicketsListData(
     queries: IGetTicketListQueryParams
   ): Promise<IGetTicketListResponse> {
     const db = await super.openDb();
-
+    const passengers = JSON.parse(queries.passengers) as IPassengers;
     const tickets = db.tickets.filter(
       (t) =>
         t.source.id === +queries.source &&
         t.destination.id === +queries.destination &&
-        queries.departureDate === t.departureDate &&
-        t.quantity >=
-          +queries.passengers.adult +
-            +queries.passengers.child +
-            +queries.passengers.infant
+        new Date(queries.departureDate).toDateString() ===
+          new Date(t.departureDate).toDateString() &&
+        t.quantity >= +passengers.adult + +passengers.child + +passengers.infant
     );
 
     const dates: IGetTicketListResponse['dates'] = Array.from(

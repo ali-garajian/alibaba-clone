@@ -15,7 +15,6 @@ export async function getAllTickets(
   req: Request<any, any, any, IGetTicketListQueryParams>,
   res: Response<IResponseModel<IGetTicketListResponse>>
 ) {
-  console.log('queries: ', req.query);
   const ticketsListData = await ticketDao.getTicketsListData(req.query);
   return res.status(OK).json({
     data: ticketsListData,

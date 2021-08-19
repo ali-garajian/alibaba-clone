@@ -1,24 +1,32 @@
+import { useEffect } from 'react';
 import { Box, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 import Ticket from '../components/Ticket/index';
-import { dummy_tickets } from '../../../data/dummy_data/tickets';
 import Conditional from 'components/Conditional';
 import Sorting from './Sorting';
 import EmptyTicketList from './EmptyTicketList';
 import useStore, { ITicketSlice } from 'data/Store';
 import { RoutesList } from 'routes/routesList';
+import useTicketListData from '../utils/useTicketListData';
 
 const ticketSelector = (state: ITicketSlice) => state.setSelectedTicket;
 
 interface ITicketListProps {}
 function TicketList({}: ITicketListProps) {
-  const tickets = dummy_tickets;
-
+  const { isLoading, error, ticketListData, fetchTicketListData } =
+    useTicketListData();
   const setSelectedTicket = useStore(ticketSelector);
   const router = useHistory();
 
-  // const emptyResult = true;
+  useEffect(() => {
+    fetchTicketListData();
+  }, []);
+
+  if (isLoading) return <div>Loading ...</div>;
+  if (error) return <div>{error}</div>;
+
+  const tickets = ticketListData?.data?.tickets ?? [];
   const emptyResult = !tickets.length;
 
   return (

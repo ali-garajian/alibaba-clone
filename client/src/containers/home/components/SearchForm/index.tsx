@@ -8,6 +8,8 @@ import DateBox from './DateBox';
 import PassengerPickerBox from './PassengerPickerBox';
 import useStore, { RootState } from 'data/Store';
 import { EFlightType, IPassengers } from 'types/models/Ticket';
+import useTicketListData from 'containers/ticketList/utils/useTicketListData';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles({
   root: {
@@ -69,6 +71,8 @@ export default function SearchForm({
     setPassengers,
   ] = useStore(searchOptionsSelector, shallow);
 
+  const { isLoading, fetchTicketListData } = useTicketListData();
+
   return (
     <Box className={clsx(externalClasses?.root, classes.root)}>
       <Box maxWidth="1200px" m="20px auto">
@@ -103,6 +107,8 @@ export default function SearchForm({
             variant="contained"
             color="primary"
             className={classes.searchBtn}
+            disabled={isLoading}
+            onClick={fetchTicketListData}
           >
             جستجو
           </Button>
