@@ -14,12 +14,7 @@ import {
   Add as AddIcon,
   Remove as RemoveIcon,
 } from '@material-ui/icons';
-
-export interface IPassengers {
-  adult: number;
-  child: number;
-  infant: number;
-}
+import { IPassengers } from 'types/models/Ticket';
 
 const useStyles = makeStyles({
   title: {

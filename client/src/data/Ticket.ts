@@ -1,6 +1,6 @@
 import { StateCreator } from 'zustand';
 
-import { ITicket } from 'containers/ticketList/components/Ticket';
+import { ITicket } from 'types/models/Ticket';
 
 export interface ITicketSlice {
   selectedTicket: ITicket | null;

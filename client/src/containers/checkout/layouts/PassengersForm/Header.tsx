@@ -8,7 +8,7 @@ import { UseFieldArrayReturn } from 'react-hook-form';
 
 import { ISearchOptionsSlice } from 'data/SearchOptions';
 import useStore from 'data/Store';
-import { IPassengers } from 'containers/home/components/SearchForm/PassengerPickerBox';
+import { IPassengers } from 'types/models/Ticket';
 import { IPassengersForm } from '.';
 
 const useStyles = makeStyles((theme: Theme) => ({

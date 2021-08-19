@@ -1,7 +1,6 @@
-import { EFlightType } from 'containers/home/components/SearchForm/FlightType';
-import { IPassengers } from 'containers/home/components/SearchForm/PassengerPickerBox';
 import { cities } from 'containers/home/utils/dummy_data';
 import { IdTitleModel } from 'types/base/IdTitleModel';
+import { EFlightType, IPassengers } from 'types/models/Ticket';
 import { StateCreator } from 'zustand';
 
 export interface ISearchOptionsSlice {

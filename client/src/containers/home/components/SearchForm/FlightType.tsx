@@ -4,6 +4,7 @@ import {
   FormControlLabel,
   Radio,
 } from '@material-ui/core';
+import { EFlightType } from 'types/models/Ticket';
 
 const useStyles = makeStyles({
   root: {
@@ -19,11 +20,6 @@ const useStyles = makeStyles({
     flexDirection: 'row',
   },
 });
-
-export enum EFlightType {
-  OneWay = 'one-way',
-  TwoWay = 'two-way',
-}
 
 interface IFlightTypeProps {
   flightType: EFlightType;

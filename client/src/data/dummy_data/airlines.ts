@@ -1,9 +1,4 @@
-export interface IAirline {
-  id: number;
-  logo: string;
-  name: string;
-  cheapestPrice?: number;
-}
+import { IAirline } from 'types/models/Airline';
 
 export const airlines: Array<IAirline> = [
   {

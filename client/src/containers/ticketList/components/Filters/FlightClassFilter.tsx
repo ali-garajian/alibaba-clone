@@ -2,7 +2,7 @@ import { FormGroup, FormControlLabel, Checkbox } from '@material-ui/core';
 import shallow from 'zustand/shallow';
 
 import CustomAccordion from 'components/CustomAccordion';
-import { EFlightClass, ETicketType } from '../Ticket';
+import { EFlightClass, ETicketType } from 'types/models/Ticket';
 import useStore, { IFiltersSlice } from 'data/Store';
 
 const flightClassLabelMap: Record<EFlightClass, string> = {

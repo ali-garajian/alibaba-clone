@@ -14,40 +14,13 @@ import {
 } from '@material-ui/icons';
 import { format } from 'date-fns-jalali';
 
-import { IdTitleModel } from 'types/base/IdTitleModel';
 import { MoneyFormat } from 'utils';
 import Conditional from 'components/Conditional';
 import useStyles from './styles';
 import { ISearchOptionsSlice } from 'data/SearchOptions';
 import useStore from 'data/Store';
 import TicketCost from '../TicketCost';
-
-export enum ETicketType {
-  Systematic = 'systematic',
-  Charters = 'charters',
-}
-export enum EFlightClass {
-  Buisiness = 'Buisiness',
-  Economy = 'Economy',
-}
-export interface ITicket {
-  id: string;
-  ticketType: ETicketType;
-  airline: {
-    name: string;
-    logo: string;
-  };
-  airplane: string;
-  class: EFlightClass;
-  source: IdTitleModel;
-  departureDate: Date;
-  destination: IdTitleModel;
-  arrivalDate: Date;
-  permittedLoggage: number;
-  terminalNumber: number;
-  price: number;
-  quantity: number;
-}
+import { ITicket } from 'types/models/Ticket';
 
 const passengersSelector = (state: ISearchOptionsSlice) => state.passengers;
 
@@ -91,7 +64,7 @@ function Ticket({ ticket, action, defaultExpanded }: ITicketProps) {
                   <Grid item xs={4} container>
                     <Box fontWeight="bold">
                       {`${ticket.source.title} ${format(
-                        ticket.departureDate,
+                        new Date(ticket.departureDate),
                         'HH:mm'
                       )}`}
                     </Box>
@@ -99,13 +72,13 @@ function Ticket({ ticket, action, defaultExpanded }: ITicketProps) {
                   <Grid item xs={4} className={classes.flightIllustrationCntr}>
                     <FlightIcon className={classes.flightIcon} />
                     <span className="date">
-                      {format(ticket.departureDate, 'EEEE d MMMM')}
+                      {format(new Date(ticket.departureDate), 'EEEE d MMMM')}
                     </span>
                   </Grid>
                   <Grid item xs={4} container justifyContent="center">
                     <Box fontWeight="bold">
                       {`${ticket.destination.title} ${format(
-                        ticket.arrivalDate,
+                        new Date(ticket.arrivalDate),
                         'HH:mm'
                       )}`}
                     </Box>
@@ -193,12 +166,20 @@ function Ticket({ ticket, action, defaultExpanded }: ITicketProps) {
                       fontSize={14}
                       my={1}
                     >
-                      <span>{format(ticket.departureDate, 'HH:mm')}</span>
-                      <span>{format(ticket.arrivalDate, 'HH:mm')}</span>
+                      <span>
+                        {format(new Date(ticket.departureDate), 'HH:mm')}
+                      </span>
+                      <span>
+                        {format(new Date(ticket.arrivalDate), 'HH:mm')}
+                      </span>
                     </Box>
                     <Box display="flex" justifyContent="space-between">
-                      <span>{format(ticket.departureDate, 'EEEE d MMMM')}</span>
-                      <span>{format(ticket.arrivalDate, 'EEEE d MMMM')}</span>
+                      <span>
+                        {format(new Date(ticket.departureDate), 'EEEE d MMMM')}
+                      </span>
+                      <span>
+                        {format(new Date(ticket.arrivalDate), 'EEEE d MMMM')}
+                      </span>
                     </Box>
                   </Grid>
                 </Grid>

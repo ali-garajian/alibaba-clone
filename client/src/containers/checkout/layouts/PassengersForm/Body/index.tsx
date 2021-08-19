@@ -16,7 +16,7 @@ import {
 } from 'react-hook-form';
 
 import useStore, { ISearchOptionsSlice } from 'data/Store';
-import { IPassengers } from 'containers/home/components/SearchForm/PassengerPickerBox';
+import { IPassengers } from 'types/models/Ticket';
 import { ComboEntry } from 'components/ComboBox';
 import PassengerInputCard from './PassengerInputCard';
 import { IPassengersForm } from '..';

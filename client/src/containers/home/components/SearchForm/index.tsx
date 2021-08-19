@@ -1,15 +1,13 @@
-import { useState } from 'react';
 import { Box, makeStyles, Button } from '@material-ui/core';
 import shallow from 'zustand/shallow';
 import clsx from 'clsx';
 
-import FlightType, { EFlightType } from './FlightType';
+import FlightType from './FlightType';
 import LocationSelectBox from './LocationSelectBox';
-import { IdTitleModel } from 'types/base/IdTitleModel';
-import { cities } from 'containers/home/utils/dummy_data';
 import DateBox from './DateBox';
-import PassengerPickerBox, { IPassengers } from './PassengerPickerBox';
+import PassengerPickerBox from './PassengerPickerBox';
 import useStore, { RootState } from 'data/Store';
+import { EFlightType, IPassengers } from 'types/models/Ticket';
 
 const useStyles = makeStyles({
   root: {

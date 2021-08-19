@@ -2,7 +2,7 @@ import { FormGroup, FormControlLabel, Checkbox } from '@material-ui/core';
 import shallow from 'zustand/shallow';
 
 import CustomAccordion from 'components/CustomAccordion';
-import { ETicketType } from '../Ticket';
+import { ETicketType } from 'types/models/Ticket';
 import useStore, { IFiltersSlice } from 'data/Store';
 
 const ticketTypeLabelMap: Record<ETicketType, string> = {

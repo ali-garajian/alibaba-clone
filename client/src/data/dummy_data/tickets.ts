@@ -1,9 +1,5 @@
 import { cities } from 'containers/home/utils/dummy_data';
-import {
-  EFlightClass,
-  ETicketType,
-  ITicket,
-} from '../../containers/ticketList/components/Ticket/index';
+import { EFlightClass, ETicketType, ITicket } from 'types/models/Ticket';
 import { airlines } from './airlines';
 
 export const dummy_tickets: Array<ITicket> = Array.from(
@@ -15,8 +11,8 @@ export const dummy_tickets: Array<ITicket> = Array.from(
   airline: airlines[index % airlines.length],
   airplane: 'Boeing 737',
   class: index % 2 ? EFlightClass.Buisiness : EFlightClass.Economy,
-  departureDate: new Date(),
-  arrivalDate: new Date(Date.now() + 3 * 60 * 60 * 1000),
+  departureDate: new Date().toISOString(),
+  arrivalDate: new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString(),
   source: cities[index % cities.length],
   destination: cities[index % cities.length],
   permittedLoggage: 25,

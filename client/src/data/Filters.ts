@@ -1,7 +1,4 @@
-import {
-  EFlightClass,
-  ETicketType,
-} from 'containers/ticketList/components/Ticket';
+import { EFlightClass, ETicketType } from 'types/models/Ticket';
 import { StateCreator } from 'zustand';
 
 export interface IFiltersSlice {
