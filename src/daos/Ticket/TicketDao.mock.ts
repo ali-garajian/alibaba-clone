@@ -35,7 +35,7 @@ class TicketDao extends MockDaoMock implements ITicketDao {
       });
 
       return {
-        date,
+        date: date.toISOString(),
         price: lowestPrice,
       };
     });

@@ -26,7 +26,7 @@ function DateCard({ date }: IDateCardProps) {
   return (
     <Box py={2}>
       <Typography align="center" className={classes.date}>
-        {format(date.date, 'EEEE - d MMMM')}
+        {format(new Date(date.date), 'EEEE - d MMMM')}
       </Typography>
       <Typography align="center" className={classes.price}>
         {MoneyFormat(date.price)}

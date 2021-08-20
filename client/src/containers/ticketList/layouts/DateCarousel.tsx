@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import { Paper, Box, makeStyles } from '@material-ui/core';
 import {
   ChevronLeft as ChevronLeftIcon,
@@ -5,8 +6,14 @@ import {
 } from '@material-ui/icons';
 import clsx from 'clsx';
 import Carousel, { RenderArrowProps } from 'react-elastic-carousel';
+import shallow from 'zustand/shallow';
+import debounce from 'lodash/debounce';
+
 import DateCard from '../components/DateCard';
-import { dummy_dates } from '../../../data/dummy_data/dates';
+import useTicketListData from '../utils/useTicketListData';
+import { IDate } from 'types/models/Ticket';
+import useStore, { ISearchOptionsSlice } from 'data/Store';
+import { useCallback } from 'react';
 
 const useArrowStyles = makeStyles({
   arrowIcon: {
@@ -76,17 +83,48 @@ const useStyles = makeStyles({
       marginLeft: '0 !important',
     },
   },
+  dateCntr: {
+    cursor: 'pointer',
+  },
 });
+
+const dateSelector = (state: ISearchOptionsSlice) =>
+  [state.startDate, state.setStartDate] as const;
 
 interface IDateCarouselProps {}
 function DateCarousel({}: IDateCarouselProps) {
-  useStyles();
+  const classes = useStyles();
+  const [current, setCurrent] = useState<number>(0);
+  const carouselRef = useRef<Carousel | null>(null);
+  const { isLoading, error, ticketListData, fetchTicketListData } =
+    useTicketListData();
+  const [departureDate, setDepartureDate] = useStore(dateSelector, shallow);
 
-  const dates = dummy_dates;
+  const dates = ticketListData?.data?.dates ?? [];
+
+  useEffect(() => {
+    fetchTicketListData();
+  }, [departureDate]);
+
+  const debouncedSetDepartureDate = useCallback(
+    debounce((date: string) => setDepartureDate(new Date(date)), 600),
+    []
+  );
+
+  const handleChangeDate = useCallback(({ date }: IDate, index: number) => {
+    // @ts-ignore
+    carouselRef.current?.goTo(index);
+    setCurrent(index);
+    debouncedSetDepartureDate(date);
+  }, []);
+
+  if (!dates?.length && isLoading) return <div>Loading ...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <Paper dir="rtl">
       <Carousel
+        ref={carouselRef}
         itemsToShow={7}
         isRTL={true}
         itemsToScroll={1}
@@ -95,9 +133,23 @@ function DateCarousel({}: IDateCarouselProps) {
         renderArrow={CustomArrow}
         enableSwipe={false}
         itemPadding={[0, 0, 0, 1]}
+        onNextStart={(_, next) =>
+          handleChangeDate(dates[next.index], next.index)
+        }
+        onPrevStart={(_, prev) =>
+          handleChangeDate(dates[prev.index], prev.index)
+        }
       >
         {dates.map((date, index) => (
-          <DateCard key={index} date={date} />
+          <Box
+            key={index}
+            width="100%"
+            border={current === index ? '1px solid black' : 'unset'}
+            className={classes.dateCntr}
+            onClick={() => handleChangeDate(date, index)}
+          >
+            <DateCard date={date} />
+          </Box>
         ))}
       </Carousel>
     </Paper>

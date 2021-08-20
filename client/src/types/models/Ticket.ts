@@ -36,7 +36,7 @@ export interface ITicket {
   quantity: number;
 }
 export interface IDate {
-  date: Date;
+  date: string;
   price: number;
 }
 
