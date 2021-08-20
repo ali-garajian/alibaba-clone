@@ -61,6 +61,9 @@ function PassengerPickerBox({
         anchorEl={anchorEl}
         transition
         disablePortal
+        style={{
+          zIndex: 100,
+        }}
       >
         {({ TransitionProps }) => (
           <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
