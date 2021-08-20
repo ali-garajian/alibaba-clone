@@ -36,7 +36,7 @@ const createSearchOptionsSlice: StateCreator<ISearchOptionsSlice> = (set) => ({
   setDestination(v) {
     set({ destination: v });
   },
-  startDate: new Date(),
+  startDate: new Date('2021-08-20T11:44:14.274Z'),
   setStartDate(v) {
     set({ startDate: v });
   },

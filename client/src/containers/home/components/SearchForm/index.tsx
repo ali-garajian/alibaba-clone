@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom';
 import { Box, makeStyles, Button } from '@material-ui/core';
 import shallow from 'zustand/shallow';
 import clsx from 'clsx';
@@ -7,9 +8,9 @@ import LocationSelectBox from './LocationSelectBox';
 import DateBox from './DateBox';
 import PassengerPickerBox from './PassengerPickerBox';
 import useStore, { RootState } from 'data/Store';
-import { EFlightType, IPassengers } from 'types/models/Ticket';
+import { EFlightType } from 'types/models/Ticket';
 import useTicketListData from 'containers/ticketList/utils/useTicketListData';
-import { useEffect } from 'react';
+import { RoutesList } from 'routes/routesList';
 
 const useStyles = makeStyles({
   root: {
@@ -55,6 +56,7 @@ export default function SearchForm({
   classes: externalClasses,
 }: ISearchFormProps) {
   const classes = useStyles();
+  const router = useHistory();
 
   const [
     flightType,
@@ -108,7 +110,10 @@ export default function SearchForm({
             color="primary"
             className={classes.searchBtn}
             disabled={isLoading}
-            onClick={fetchTicketListData}
+            onClick={() => {
+              router.push(RoutesList.TicketList);
+              fetchTicketListData();
+            }}
           >
             جستجو
           </Button>

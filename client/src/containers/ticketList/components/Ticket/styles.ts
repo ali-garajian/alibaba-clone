@@ -94,6 +94,19 @@ const useStyles = makeStyles({
   },
   rightCntr: {
     borderRight: '1px dashed #aaa',
+    position: 'relative',
+  },
+  ticketType: {
+    transform: 'rotate(90deg) translateY(-9px)',
+    color: '#aaa',
+    top: 10,
+    left: 0,
+    border: '1px solid #aaa',
+    fontSize: 10,
+    position: 'absolute',
+    transformOrigin: 'center left',
+    borderBottom: 'unset',
+    padding: '1px 15px',
   },
   collapseableRightCntr: {
     borderRight: '1px dashed #aaa',

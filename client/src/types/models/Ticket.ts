@@ -1,4 +1,5 @@
 import { IdTitleModel } from 'types/base/IdTitleModel';
+import { IAirline } from './Airline';
 
 export enum EFlightType {
   OneWay = 'one-way',
@@ -20,10 +21,7 @@ export interface IPassengers {
 export interface ITicket {
   id: string;
   ticketType: ETicketType;
-  airline: {
-    name: string;
-    logo: string;
-  };
+  airline: IAirline;
   airplane: string;
   class: EFlightClass;
   source: IdTitleModel;

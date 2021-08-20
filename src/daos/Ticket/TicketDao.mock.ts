@@ -25,11 +25,14 @@ class TicketDao extends MockDaoMock implements ITicketDao {
       { length: 21 },
       (_, i) => i
     ).map((index) => {
-      const date = new Date(Date.now() + index * 24 * 3600 * 1000);
+      const date = new Date(
+        new Date('2021-08-20T11:44:14.274Z').getTime() +
+          index * 24 * 3600 * 1000
+      );
       const dateTickets = db.tickets.filter(
         (i) => new Date(i.departureDate).toDateString() === date.toDateString()
       );
-      let lowestPrice = dateTickets?.[0].price;
+      let lowestPrice = dateTickets?.[0]?.price;
       dateTickets.forEach((t) => {
         if (t.price < lowestPrice) lowestPrice = t.price;
       });

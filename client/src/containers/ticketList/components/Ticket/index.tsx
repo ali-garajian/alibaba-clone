@@ -20,7 +20,7 @@ import useStyles from './styles';
 import { ISearchOptionsSlice } from 'data/SearchOptions';
 import useStore from 'data/Store';
 import TicketCost from '../TicketCost';
-import { ITicket } from 'types/models/Ticket';
+import { ETicketType, ITicket } from 'types/models/Ticket';
 
 const passengersSelector = (state: ISearchOptionsSlice) => state.passengers;
 
@@ -42,6 +42,14 @@ function Ticket({ ticket, action, defaultExpanded }: ITicketProps) {
       <Paper className={classes.rootPaper}>
         <Grid container className={classes.contentCntr}>
           <Grid item xs={9} className={classes.rightCntr}>
+            <Box className={classes.ticketType}>
+              {
+                {
+                  [ETicketType.Systematic]: 'سیستمی',
+                  [ETicketType.Charters]: 'چارتر',
+                }[ticket.ticketType]
+              }
+            </Box>
             <Box display="flex" p={1}>
               <Box className={classes.airlineCntr} mr={2} ml={3}>
                 <img

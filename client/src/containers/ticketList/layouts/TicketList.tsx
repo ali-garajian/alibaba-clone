@@ -8,16 +8,31 @@ import Sorting from './Sorting';
 import EmptyTicketList from './EmptyTicketList';
 import useStore, { ITicketSlice } from 'data/Store';
 import { RoutesList } from 'routes/routesList';
-import useTicketListData from '../utils/useTicketListData';
+import useTicketListData, {
+  filtersAndSortsSelector,
+} from '../utils/useTicketListData';
+import shallow from 'zustand/shallow';
 
 const ticketSelector = (state: ITicketSlice) => state.setSelectedTicket;
-
+let counter = 0;
 interface ITicketListProps {}
 function TicketList({}: ITicketListProps) {
-  const { isLoading, error, ticketListData, fetchTicketListData } =
-    useTicketListData();
+  const {
+    isLoading,
+    error,
+    ticketListData,
+    fetchTicketListData,
+    applyFiltersOnChange,
+  } = useTicketListData();
+
   const setSelectedTicket = useStore(ticketSelector);
+  const filtersAndSorts = useStore(filtersAndSortsSelector, shallow);
+
   const router = useHistory();
+
+  useEffect(() => {
+    applyFiltersOnChange();
+  }, filtersAndSorts);
 
   useEffect(() => {
     fetchTicketListData();
