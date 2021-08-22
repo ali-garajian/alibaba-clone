@@ -1,14 +1,12 @@
-import { TextField, makeStyles, Divider, Theme } from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
-import {
-  SyncAlt as SyncAltIcon,
-  LocationOnOutlined as LocationOnOutlinedIcon,
-} from '@material-ui/icons';
+import { makeStyles, Divider, Theme } from '@material-ui/core';
+import { SyncAlt as SyncAltIcon } from '@material-ui/icons';
 import { Box } from '@material-ui/core';
 import clsx from 'clsx';
 
 import { IdTitleModel } from 'types/base/IdTitleModel';
-import { cities } from '../../utils/dummy_data';
+import _CACHE from 'data/_CACHE';
+import { AsyncAutocomplete } from 'components/AsyncAutocomplete';
+import CitiesApi from 'service/cities';
 
 const useStyles = makeStyles((theme: Theme) => ({
   comboBoxInputRoot: {
@@ -31,10 +29,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   destinationComboBox: {
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
-  },
-  startAdornment: {
-    fontSize: 20,
-    color: '#aaa',
   },
   switchBtn: {
     position: 'absolute',
@@ -84,28 +78,17 @@ function LocationSelectBox({
 
   return (
     <Box display="flex" position="relative" width="480px">
-      <Autocomplete
-        id="destination-combobox"
+      <AsyncAutocomplete
+        cacheKey="source-combobox"
         value={source}
         onChange={(_, value) => onSourceChange(value)}
-        options={cities}
-        getOptionLabel={(option) => option.title}
-        disableClearable
-        popupIcon={null}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="filled"
-            className={clsx(classes.comboBoxInputRoot, classes.sourceComboBox)}
-            InputProps={{
-              ...params.InputProps,
-              disableUnderline: true,
-              startAdornment: (
-                <LocationOnOutlinedIcon className={classes.startAdornment} />
-              ),
-            }}
-          />
-        )}
+        textFieldProps={{
+          className: clsx(classes.comboBoxInputRoot, classes.sourceComboBox),
+        }}
+        fetchOptions={async (search) => {
+          const response = await CitiesApi.getCities({ q: search });
+          return response.data ?? [];
+        }}
       />
       <Divider orientation="vertical" className={classes.divider} />
       <SyncAltIcon
@@ -113,31 +96,20 @@ function LocationSelectBox({
         fontSize="small"
         onClick={onToggle}
       />
-      <Autocomplete
-        id="destination-combobox"
+      <AsyncAutocomplete
+        cacheKey="destination-combobox"
         value={destination}
         onChange={(_, value) => onDestinationChange(value)}
-        options={cities}
-        getOptionLabel={(option) => option.title}
-        disableClearable
-        popupIcon={null}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="filled"
-            className={clsx(
-              classes.comboBoxInputRoot,
-              classes.destinationComboBox
-            )}
-            InputProps={{
-              ...params.InputProps,
-              disableUnderline: true,
-              startAdornment: (
-                <LocationOnOutlinedIcon className={classes.startAdornment} />
-              ),
-            }}
-          />
-        )}
+        textFieldProps={{
+          className: clsx(
+            classes.comboBoxInputRoot,
+            classes.destinationComboBox
+          ),
+        }}
+        fetchOptions={async (search) => {
+          const response = await CitiesApi.getCities({ q: search });
+          return response.data ?? [];
+        }}
       />
     </Box>
   );

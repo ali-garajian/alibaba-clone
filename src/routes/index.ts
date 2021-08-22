@@ -3,6 +3,7 @@ import { adminMW, loggedInMW } from './middleware';
 import { login, logout } from './Auth';
 import { getAllUsers, addOneUser, updateOneUser, deleteOneUser } from './Users';
 import { getAllTickets } from './Tickets';
+import { getAllCities } from './Cities';
 
 // Auth router
 const authRouter = Router();
@@ -20,10 +21,15 @@ userRouter.delete('/delete/:id', deleteOneUser);
 const ticketRouter = Router();
 ticketRouter.get('/', getAllTickets);
 
+// City router
+const cityRouter = Router();
+cityRouter.get('/', getAllCities);
+
 // Export the base-router
 const baseRouter = Router();
 baseRouter.use('/auth', authRouter);
 baseRouter.use('/users', adminMW, userRouter);
 baseRouter.use('/tickets', ticketRouter);
+baseRouter.use('/cities', cityRouter);
 
 export default baseRouter;
