@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import {
   Grid,
   Paper,
@@ -238,4 +238,6 @@ function Ticket({ ticket, action, defaultExpanded }: ITicketProps) {
   );
 }
 
-export default Ticket;
+export default memo(Ticket, (prev, next) => {
+  return prev.ticket.id === next.ticket.id;
+});

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Box, Typography, makeStyles } from '@material-ui/core';
 import { format } from 'date-fns-jalali';
 
@@ -38,4 +39,6 @@ function DateCard({ date }: IDateCardProps) {
   );
 }
 
-export default DateCard;
+export default memo(DateCard, (prev, next) => {
+  return prev.date.date === next.date.date;
+});

@@ -14,7 +14,7 @@ import useTicketListData, {
 import shallow from 'zustand/shallow';
 
 const ticketSelector = (state: ITicketSlice) => state.setSelectedTicket;
-let counter = 0;
+
 interface ITicketListProps {}
 function TicketList({}: ITicketListProps) {
   const {
@@ -31,7 +31,7 @@ function TicketList({}: ITicketListProps) {
   const router = useHistory();
 
   useEffect(() => {
-    applyFiltersOnChange();
+    applyFiltersOnChange(filtersAndSorts);
   }, filtersAndSorts);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ function TicketList({}: ITicketListProps) {
         <Sorting />
         {tickets.map((ticket, i) => (
           <Ticket
-            key={i}
+            key={ticket.id}
             ticket={ticket}
             action={
               <Button

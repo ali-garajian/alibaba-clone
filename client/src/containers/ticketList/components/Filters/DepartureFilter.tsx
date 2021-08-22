@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { Box, makeStyles, Theme, Slider } from '@material-ui/core';
 import {
   Brightness6 as TwilightIcon,
@@ -33,6 +34,17 @@ function DepartureFilter({}: IDepartureFilterProps) {
   const classes = useStyles();
   const [value, setValue] = useStore(departureRangeSelector, shallow);
 
+  const handleChange = useCallback(
+    (_: React.ChangeEvent<{}>, newValue: number | number[]) => {
+      if (typeof newValue === 'number') {
+        return;
+      }
+
+      setValue(newValue);
+    },
+    []
+  );
+
   return (
     <CustomAccordion title="ساعت حرکت">
       <Box
@@ -52,13 +64,7 @@ function DepartureFilter({}: IDepartureFilterProps) {
           min={5}
           max={24}
           value={value}
-          onChange={(_, newValue) => {
-            if (typeof newValue === 'number') {
-              return;
-            }
-
-            setValue(newValue);
-          }}
+          onChange={handleChange}
         />
       </LtrProvider>
       <Box
