@@ -1,9 +1,8 @@
-import Footer from 'containers/global/Footer';
 import Content from './components/Content';
 import FeatureBox from './components/FeatureBox';
 import QuestionFrequently from './components/Questions/questionFrequently';
 import Banner from './layouts/Banner';
-import { Box } from '@material-ui/core'
+import { Box } from '@material-ui/core';
 
 export default function HomePage() {
   return (
@@ -12,7 +11,6 @@ export default function HomePage() {
       <FeatureBox />
       <Content />
       <QuestionFrequently />
-      <Footer />
     </Box>
   );
 }
