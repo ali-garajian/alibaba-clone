@@ -5,6 +5,9 @@ const theme = createTheme({
     primary: {
       main: '#ffa500',
     },
+    secondary: {
+      main: '#8bc34a',
+    },
   },
   overrides: {
     MuiRadio: {
@@ -14,6 +17,9 @@ const theme = createTheme({
     },
     MuiButton: {
       containedPrimary: {
+        color: '#fff',
+      },
+      containedSecondary: {
         color: '#fff',
       },
     },

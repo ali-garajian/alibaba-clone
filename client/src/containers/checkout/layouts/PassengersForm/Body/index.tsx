@@ -15,12 +15,12 @@ import {
   UseFieldArrayReturn,
 } from 'react-hook-form';
 
-import useStore, { ISearchOptionsSlice } from 'data/Store';
-import { IPassengers } from 'types/models/Ticket';
-import { ComboEntry } from 'components/ComboBox';
+import useStore, { IPassengersSlice } from 'data/Store';
 import PassengerInputCard from './PassengerInputCard';
 import { IPassengersForm } from '..';
 import Conditional from 'components/Conditional';
+import { useStepperCtx } from '../../Stepper/Provider';
+import { CheckoutSteps } from '../../Stepper/_utils';
 
 const useStyles = makeStyles({
   form: {},
@@ -28,6 +28,9 @@ const useStyles = makeStyles({
     minWidth: 250,
   },
 });
+
+const passengersInfoSelector = (state: IPassengersSlice) =>
+  state.setPassengersInfo;
 
 interface IPassengersFormBodyProps
   extends UseFormReturn<IPassengersForm>,
@@ -47,6 +50,10 @@ function PassengersFormBody({
     error?: string;
   }>({ value: false });
 
+  const setPassengersInfo = useStore(passengersInfoSelector);
+
+  const { setActiveStep } = useStepperCtx();
+
   const onSubmit: SubmitHandler<IPassengersForm> = async (data) => {
     if (!termsAndConditionsChecked.value) {
       return setTermsAndConditionsChecked({
@@ -54,6 +61,9 @@ function PassengersFormBody({
         error: 'پذیرفتن قوانین الزامی است',
       });
     }
+
+    setPassengersInfo(data.passengers);
+    setActiveStep(CheckoutSteps.Confirmation);
     console.log('data: ', data);
   };
 

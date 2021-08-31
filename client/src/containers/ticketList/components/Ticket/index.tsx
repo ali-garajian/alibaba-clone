@@ -1,12 +1,5 @@
 import { useState, memo } from 'react';
-import {
-  Grid,
-  Paper,
-  Collapse,
-  Box,
-  Button,
-  Typography,
-} from '@material-ui/core';
+import { Grid, Paper, Collapse, Box, Typography } from '@material-ui/core';
 import {
   Flight as FlightIcon,
   ExpandMore as ExpandMoreIcon,
