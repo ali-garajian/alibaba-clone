@@ -1,4 +1,4 @@
-import { IUser } from '@entities/User';
+import { EUserRoles, IUser } from '@entities/User';
 import { IClientData } from '@shared/JwtService';
 
 declare module 'express' {
@@ -7,6 +7,7 @@ declare module 'express' {
       user: IUser;
       email: string;
       password: string;
+      role: EUserRoles;
     };
   }
 }

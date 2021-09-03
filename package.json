@@ -7,7 +7,9 @@
     "server": "node -r module-alias/register ./dist --env=production",
     "server:dev": "nodemon",
     "client": "node start-client",
+    "client:admin": "node start-admin",
     "start": "concurrently \"yarn server:dev\" \"yarn client\"",
+    "admin": "concurrently \"yarn server:dev\" \"yarn client:admin\"",
     "test": "nodemon --config ./spec/nodemon.json",
     "test:no-reloading": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./spec"
   },
@@ -27,40 +29,6 @@
     "@shared": "dist/shared",
     "@server": "dist/Server"
   },
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:@typescript-eslint/recommended-requiring-type-checking"
-    ],
-    "parserOptions": {
-      "project": "./tsconfig.json"
-    },
-    "rules": {
-      "max-len": [
-        "error",
-        {
-          "code": 100
-        }
-      ],
-      "no-console": 1,
-      "no-extra-boolean-cast": 0,
-      "@typescript-eslint/restrict-plus-operands": 0,
-      "@typescript-eslint/explicit-module-boundary-types": 0,
-      "@typescript-eslint/no-explicit-any": 0,
-      "@typescript-eslint/no-floating-promises": 0,
-      "@typescript-eslint/no-unsafe-member-access": 0,
-      "@typescript-eslint/no-unsafe-assignment": 0
-    }
-  },
-  "eslintIgnore": [
-    "src/public/",
-    "build.ts"
-  ],
   "dependencies": {
     "bcrypt": "^5.0.1",
     "command-line-args": "^5.2.0",

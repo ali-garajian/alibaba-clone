@@ -7,7 +7,6 @@ import { JwtService } from '@shared/JwtService';
 import { cookieProps, pwdSaltRounds } from '@shared/constants';
 import { IResponseModel } from '@entities/base/ResponseModel';
 import { EMessages } from '@shared/messages';
-import { EUserRoles } from '@entities/User';
 
 const userDao = new UserDao();
 const jwtService = new JwtService();
@@ -15,7 +14,7 @@ const { BAD_REQUEST, OK, UNAUTHORIZED, INTERNAL_SERVER_ERROR } = StatusCodes;
 
 export async function login(req: Request, res: Response<IResponseModel>) {
   // Check email and password present
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
   if (!(email && password)) {
     return res.status(BAD_REQUEST).json({
       msg: EMessages.UsernameOrPasswordMissing,
@@ -26,7 +25,7 @@ export async function login(req: Request, res: Response<IResponseModel>) {
   const user = await userDao.getOne(email);
   if (!user) {
     return res.status(UNAUTHORIZED).json({
-      msg: EMessages.PromptToRegisterUser,
+      msg: EMessages.LoginFailed,
     });
   }
 
@@ -35,6 +34,13 @@ export async function login(req: Request, res: Response<IResponseModel>) {
   if (!pwdPassed) {
     return res.status(UNAUTHORIZED).json({
       msg: EMessages.LoginFailed,
+    });
+  }
+
+  // Check user's role
+  if (user.role !== role) {
+    return res.status(UNAUTHORIZED).json({
+      msg: EMessages.Unauthorized,
     });
   }
 
@@ -55,7 +61,7 @@ export async function login(req: Request, res: Response<IResponseModel>) {
 
 export async function register(req: Request, res: Response<IResponseModel>) {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
     if (!(email && password)) {
       return res.status(BAD_REQUEST).json({
         msg: EMessages.UsernameOrPasswordMissing,
@@ -67,7 +73,7 @@ export async function register(req: Request, res: Response<IResponseModel>) {
       email,
       pwdHash: hashedPassword,
       name: email,
-      role: EUserRoles.Standard,
+      role,
     });
 
     return res.status(OK).end();
@@ -78,7 +84,7 @@ export async function register(req: Request, res: Response<IResponseModel>) {
   }
 }
 
-export async function logout(req: Request, res: Response) {
+export function logout(req: Request, res: Response) {
   const { key, options } = cookieProps;
   res.clearCookie(key, options);
   res.clearCookie('logged-in', { maxAge: options.maxAge });

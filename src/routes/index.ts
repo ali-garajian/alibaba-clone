@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { adminMW, loggedInMW } from './middleware';
-import { login, logout } from './Auth';
+import { login, logout, register } from './Auth';
 import { getAllUsers, addOneUser, updateOneUser, deleteOneUser } from './Users';
 import { getAllTickets } from './Tickets';
 import { getAllCities } from './Cities';
@@ -8,6 +8,7 @@ import { getAllCities } from './Cities';
 // Auth router
 const authRouter = Router();
 authRouter.post('/login', login);
+authRouter.post('/register', register);
 authRouter.get('/logout', logout);
 
 // User-router

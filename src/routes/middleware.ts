@@ -36,15 +36,11 @@ export const adminMW = async (
   }
 };
 
-export const loggedInMW = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const loggedInMW = (req: Request, res: Response, next: NextFunction) => {
   try {
     const signedInCookie = req.cookies['logged-in'];
     if (!signedInCookie) {
-      throw Error(EMessages.Unauthorized);
+      throw Error(EMessages.Unauthenticated);
     }
     next();
   } catch (err) {

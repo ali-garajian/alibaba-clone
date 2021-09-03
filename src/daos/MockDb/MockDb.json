@@ -1,5 +1,13 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": 1,
+      "name": "زهره موسوی",
+      "email": "test@example.com",
+      "pwdHash": "$2a$12$T7AUdzr5BIKZZdZcI.eG1.0yLD59DBJ9g9UWhXx4ljTQ4Yag89BW6",
+      "role": 1
+    }
+  ],
   "cities": [
     { "id": 1, "title": "تهران" },
     { "id": 2, "title": "مشهد" },
