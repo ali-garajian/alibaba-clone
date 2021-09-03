@@ -1,5 +1,8 @@
+import {} from '@material-ui/core';
+import CustomTypography from 'components/CustomTypography';
+
 function DashboardPage() {
-  return <div>dashbaord page</div>;
+  return <CustomTypography>به پنل مدیریت علی بابا خوش آمدید</CustomTypography>;
 }
 
 export default DashboardPage;
