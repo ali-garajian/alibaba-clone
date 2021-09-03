@@ -1,10 +1,19 @@
 import {
-  IGetTicketListQueryParams,
-  IGetTicketListResponse,
-} from '@entities/Ticket';
+  GetClientTicketListQueryParams,
+  GetClientTicketListResponse,
+  GetAdminTicketListQueryParams,
+  GetAdminTicketListResponse,
+  DeleteAdminTicketsQueryParams,
+} from '@models/Ticket';
 
 export interface ITicketDao {
-  getTicketsListData(
-    queries: IGetTicketListQueryParams
-  ): Promise<IGetTicketListResponse>;
+  getTicketsAndDates(
+    queries: GetClientTicketListQueryParams
+  ): Promise<GetClientTicketListResponse>;
+
+  getAllTickets(
+    queries: GetAdminTicketListQueryParams
+  ): Promise<GetAdminTicketListResponse>;
+
+  deleteTickets(req: DeleteAdminTicketsQueryParams): Promise<void>;
 }

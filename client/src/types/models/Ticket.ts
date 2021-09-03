@@ -1,4 +1,4 @@
-import { IdTitleModel } from 'types/base/IdTitleModel';
+import { IdTitleModel } from '../base/IdTitleModel';
 import { IAirline } from './Airline';
 
 export enum EFlightType {

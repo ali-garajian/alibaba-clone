@@ -1,17 +1,21 @@
 import { ITicketDao } from './TicketDao';
 import MockDaoMock from '../MockDb/MockDao.mock';
+import { EFlightClass, ETicketType } from 'client/src/types/models/Ticket';
 import {
-  IGetTicketListQueryParams,
-  IGetTicketListResponse,
-} from '@entities/Ticket';
-import { IPassengers } from 'client/src/types/models/Ticket';
+  GetClientTicketListQueryParams,
+  GetClientTicketListResponse,
+  GetAdminTicketListQueryParams,
+  GetAdminTicketListResponse,
+  DeleteAdminTicketsQueryParams,
+} from '@models/Ticket';
 
 class TicketDao extends MockDaoMock implements ITicketDao {
-  public async getTicketsListData(
-    queries: IGetTicketListQueryParams
-  ): Promise<IGetTicketListResponse> {
+  public async getTicketsAndDates(
+    queries: GetClientTicketListQueryParams
+  ): Promise<GetClientTicketListResponse> {
     const db = await super.openDb();
-    const passengers = JSON.parse(queries.passengers) as IPassengers;
+    const passengers = queries.passengers;
+
     const tickets = db.tickets.filter(
       (t) =>
         t.source.id === +queries.source &&
@@ -21,7 +25,7 @@ class TicketDao extends MockDaoMock implements ITicketDao {
         t.quantity >= +passengers.adult + +passengers.child + +passengers.infant
     );
 
-    const dates: IGetTicketListResponse['dates'] = Array.from(
+    const dates: GetClientTicketListResponse['dates'] = Array.from(
       { length: 21 },
       (_, i) => i
     ).map((index) => {
@@ -47,6 +51,43 @@ class TicketDao extends MockDaoMock implements ITicketDao {
       tickets,
       dates,
     };
+  }
+
+  public async getAllTickets(
+    queries: GetAdminTicketListQueryParams
+  ): Promise<GetAdminTicketListResponse> {
+    const db = await super.openDb();
+    const tickets = db.tickets.filter((t) =>
+      queries.source
+        ? t.source.id === +queries.source
+        : true && queries.destination
+        ? t.destination.id === +queries.destination
+        : true && queries.departureDate
+        ? new Date(queries.departureDate).toDateString() ===
+          new Date(t.departureDate).toDateString()
+        : true
+    );
+
+    return tickets.map((ticket, index) => ({
+      ...ticket,
+      ticketType:
+        ticket.ticketType === ETicketType.Charters ? 'چارتر' : 'سیستمی',
+      airline: ticket.airline.name,
+      class: ticket.class === EFlightClass.Buisiness ? 'بیزینس' : 'اکونومی',
+      source: ticket.source.title,
+      destination: ticket.destination.title,
+      price: ticket.price * 1000,
+    }));
+  }
+
+  public async deleteTickets({ ids }: DeleteAdminTicketsQueryParams) {
+    const db = await super.openDb();
+    const filteredTickets = db.tickets.filter((t) => !ids.includes(t.id));
+
+    await super.saveDb({
+      ...db,
+      tickets: filteredTickets,
+    });
   }
 }
 

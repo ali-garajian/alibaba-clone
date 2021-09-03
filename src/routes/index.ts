@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { adminMW, loggedInMW } from './middleware';
 import { login, logout, register } from './Auth';
 import { getAllUsers, addOneUser, updateOneUser, deleteOneUser } from './Users';
-import { getAllTickets } from './Tickets';
+import { getAllTicketsAndDates, getAllTickets, deleteTickets } from './Tickets';
 import { getAllCities } from './Cities';
 
 // Auth router
@@ -20,7 +20,9 @@ userRouter.delete('/delete/:id', deleteOneUser);
 
 // Ticket router
 const ticketRouter = Router();
-ticketRouter.get('/', getAllTickets);
+ticketRouter.get('/client', getAllTicketsAndDates);
+ticketRouter.get('/admin', adminMW, getAllTickets);
+ticketRouter.delete('/admin', adminMW, deleteTickets as any);
 
 // City router
 const cityRouter = Router();

@@ -5,4 +5,5 @@ export enum EMessages {
   InternalServerError = 'خطایی در برنامه رخ داده است. لطفا مجددا تلاش نمایید',
   Unauthenticated = 'برای انجام این عملیات باید ابتدا به حساب کاربری خود وارد شوید.',
   Unauthorized = 'شما دسترسی لازم برای انجام این عملیات را ندارید',
+  OperationSuccessfull = 'عملیات با موفقیت انجام شد',
 }

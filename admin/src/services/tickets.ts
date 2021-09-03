@@ -1,13 +1,18 @@
 import { ApiService, ApiResponse } from './_base';
 import {
   IGetTicketListQueryParams,
-  IGetTicketListResponse,
+  GetTicketListResponse,
+  IDeleteTicketsRequest,
 } from 'types/models/Ticket';
 
 export default class TicketsApi extends ApiService {
-  static async getTicketListData(
+  static async getTicketList(
     params: IGetTicketListQueryParams
-  ): ApiResponse<IGetTicketListResponse> {
-    return await this.axios.get('/tickets', { params });
+  ): ApiResponse<GetTicketListResponse> {
+    return await this.axios.get('/tickets/admin', { params });
+  }
+
+  static async deleteTickets(req: IDeleteTicketsRequest): ApiResponse<{}> {
+    return await this.axios.delete('/tickets/admin', { params: req });
   }
 }

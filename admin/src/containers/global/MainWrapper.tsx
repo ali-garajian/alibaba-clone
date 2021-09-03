@@ -41,7 +41,13 @@ export default function MainWrapper({ children }: React.PropsWithChildren<{}>) {
           <Appbar />
           <Sidebar />
         </Conditional>
-        <Box component="main" flexGrow={1} p={3}>
+        <Box
+          component="main"
+          flexGrow={1}
+          p={3}
+          display="flex"
+          flexDirection="column"
+        >
           <Conditional condition={isLoggedIn}>
             <div className={classes.toolbar} />
           </Conditional>

@@ -1,4 +1,4 @@
-import { IdTitleModel } from 'types/base/IdTitleModel';
+import { IdTitleModel, IPaginatedRequest } from 'types/base';
 import { IAirline } from './Airline';
 
 export enum EFlightType {
@@ -12,11 +12,6 @@ export enum ETicketType {
 export enum EFlightClass {
   Buisiness = 'Buisiness',
   Economy = 'Economy',
-}
-export interface IPassengers {
-  adult: number;
-  child: number;
-  infant: number;
 }
 export interface ITicket {
   id: string;
@@ -33,20 +28,22 @@ export interface ITicket {
   price: number;
   quantity: number;
 }
-export interface IDate {
-  date: string;
-  price: number;
-}
 
-// GET /tickets
-export interface IGetTicketListQueryParams {
-  source: number;
-  destination: number;
-  departureDate: string;
-  returnDate?: string;
-  passengers: IPassengers;
+// GET /tickets/admin
+export type TicketTableRepresentation = Pick<
+  ITicket,
+  'id' | 'airplane' | 'departureDate' | 'terminalNumber' | 'price' | 'quantity'
+> &
+  Record<'ticketType' | 'airline' | 'class' | 'source' | 'destination', string>;
+
+export interface IGetTicketListQueryParams extends IPaginatedRequest {
+  source?: number;
+  destination?: number;
+  departureDate?: string;
 }
-export interface IGetTicketListResponse {
-  dates: Array<IDate>;
-  tickets: Array<ITicket>;
+export type GetTicketListResponse = Array<TicketTableRepresentation>;
+
+// GET /ticktes/admin
+export interface IDeleteTicketsRequest {
+  ids: string[];
 }

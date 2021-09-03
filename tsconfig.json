@@ -77,6 +77,9 @@
       ],
       "@server": [
         "src/Server"
+      ],
+      "@models/*": [
+        "src/models/*"
       ]
     },
   },

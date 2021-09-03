@@ -6,7 +6,7 @@ import { isAuthenticated } from 'utils';
 
 const LoginPage = lazy(() => import('containers/login'));
 const DashboardPage = lazy(() => import('containers/dashboard'));
-const TicketListPage = lazy(() => import('containers/tickets'));
+const TicketListPage = lazy(() => import('containers/tickets/list'));
 
 export default function Routes() {
   return (
