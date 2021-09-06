@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import StatusCodes from 'http-status-codes';
 
-import UserDao from '@daos/User/UserDao.mock';
+import UserDao from '@daos/User/UserDao';
 import { JwtService } from '@shared/JwtService';
 import { cookieProps, pwdSaltRounds } from '@shared/constants';
 import { IResponseModel } from '@entities/base/ResponseModel';
@@ -31,6 +31,7 @@ export async function login(req: AdminRequest, res: Response<IResponseModel>) {
   }
 
   // Check password
+  // TODO: this await doesn't look good!
   const pwdPassed = await bcrypt.compare(password, user.pwdHash);
   if (!pwdPassed) {
     return res.status(UNAUTHORIZED).json({

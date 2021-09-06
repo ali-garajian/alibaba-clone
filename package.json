@@ -44,6 +44,7 @@
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
     "randomstring": "^1.2.1",
     "slick-carousel": "^1.8.1"
   },
@@ -58,6 +59,7 @@
     "@types/jsonfile": "^6.0.1",
     "@types/jsonwebtoken": "^8.5.4",
     "@types/morgan": "^1.9.3",
+    "@types/mysql": "^2.15.19",
     "@types/node": "^16.4.13",
     "@types/randomstring": "^1.1.7",
     "@types/supertest": "^2.0.11",

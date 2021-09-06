@@ -1,7 +1,7 @@
 // Base Models
 export enum EUserRoles {
-  Standard,
-  Admin,
+  Standard = 'standard',
+  Admin = 'admin',
 }
 
 // POST /login

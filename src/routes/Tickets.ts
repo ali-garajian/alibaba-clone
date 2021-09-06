@@ -1,7 +1,6 @@
 import StatusCodes from 'http-status-codes';
 import { Request, Response } from 'express';
 
-import TicketDao from '@daos/Ticket/TicketDao.mock';
 import { IResponseModel } from '@entities/base/ResponseModel';
 import {
   GetClientTicketListQueryParams,
@@ -13,6 +12,7 @@ import {
   DbTicket,
 } from '@models/Ticket';
 import { EMessages } from '@shared/messages';
+import { TicketDao } from '@daos/Ticket/TicketDao';
 
 const ticketDao = new TicketDao();
 const { OK } = StatusCodes;

@@ -1,6 +1,6 @@
 export enum EUserRoles {
-  Standard,
-  Admin,
+  Standard = 'standard',
+  Admin = 'admin',
 }
 
 export interface IUser {

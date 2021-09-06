@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Grid, Box } from '@material-ui/core';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import useSwr from 'swr';
+import useSwr, { mutate } from 'swr';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { format } from 'date-fns-jalali';
@@ -11,7 +11,6 @@ import { AddTicketForm, EFlightClass, ETicketType } from 'types/models/Ticket';
 import FormTextInput from 'components/FormTextInput';
 import FormComboBox from 'components/FormComboBox';
 import FormDatePicker from 'components/FormDatePicker';
-import { IAirline } from 'types/models/Airline';
 import AirlineApi from 'services/airline';
 import { CitiesApi, TicketsApi } from 'services';
 import CustomButton from 'components/CustomButton';
@@ -85,6 +84,7 @@ function AddTicketPage() {
         destinationId: destination!.id,
         sourceId: source!.id,
       });
+      mutate('/tickets');
 
       history.replace(RoutesList.TicketList);
     } catch (e: any) {
@@ -345,7 +345,7 @@ function AddTicketPage() {
                 validate: (endDate) => {
                   const startDate = getValues('departureDate');
                   return (
-                    endDate > startDate ||
+                    endDate >= startDate ||
                     'زمان پایان پرواز باید از زمان شروع آن بزرگتر باشد'
                   );
                 },
