@@ -49,13 +49,10 @@ function TicketListPage() {
             .then((res) => {
               alert(res.msg);
               mutate(
-                (prev) =>
-                  prev
-                    ? {
-                        ...prev,
-                        data: newData,
-                      }
-                    : undefined,
+                (prev) => ({
+                  ...prev!,
+                  data: prevData.filter((i) => !deletedRowIds.includes(i.id)),
+                }),
                 false
               );
             })
