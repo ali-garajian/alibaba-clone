@@ -1,5 +1,6 @@
 import { IdTitleModel, IPaginatedRequest } from 'types/base';
 import { IAirline } from './Airline';
+import { ComboEntry } from 'components/ComboBox';
 
 export enum EFlightType {
   OneWay = 'one-way',
@@ -29,6 +30,16 @@ export interface ITicket {
   quantity: number;
 }
 
+export type AddTicketForm = Pick<
+  ITicket,
+  'airplane' | 'permittedLoggage' | 'terminalNumber' | 'price' | 'quantity'
+> &
+  Record<
+    'ticketType' | 'airline' | 'class' | 'source' | 'destination',
+    ComboEntry | null
+  > &
+  Record<'departureDate' | 'arrivalDate', Date>;
+
 // GET /tickets/admin
 export type TicketTableRepresentation = Pick<
   ITicket,
@@ -47,3 +58,14 @@ export type GetTicketListResponse = Array<TicketTableRepresentation>;
 export interface IDeleteTicketsRequest {
   ids: string[];
 }
+
+// POST /tickets/admin
+export type CreateNewTicketRequest = Omit<
+  ITicket,
+  'id' | 'airline' | 'source' | 'destination'
+> & {
+  airlineId: number;
+  sourceId: number;
+  destinationId: number;
+};
+export type CreateNewTicketResponse = ITicket;

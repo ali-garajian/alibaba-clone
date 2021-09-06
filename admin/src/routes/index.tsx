@@ -7,6 +7,7 @@ import { isAuthenticated } from 'utils';
 const LoginPage = lazy(() => import('containers/login'));
 const DashboardPage = lazy(() => import('containers/dashboard'));
 const TicketListPage = lazy(() => import('containers/tickets/list'));
+const AddTicketPage = lazy(() => import('containers/tickets/add'));
 
 export default function Routes() {
   return (
@@ -27,6 +28,11 @@ export default function Routes() {
         exact
         path={RoutesList.TicketList}
         component={TicketListPage}
+      />
+      <PrivateRoute
+        exact
+        path={RoutesList.AddTicket}
+        component={AddTicketPage}
       />
       <Route path="*">
         {isAuthenticated() ? <DashboardPage /> : <LoginPage />}

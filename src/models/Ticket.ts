@@ -6,7 +6,17 @@ import {
   IGetTicketListQueryParams as IAdminQueryParams,
   GetTicketListResponse as AdminResponse,
   IDeleteTicketsRequest,
+  CreateNewTicketRequest,
+  ITicket,
 } from 'admin/src/types/models/Ticket';
+
+export { ITicket };
+
+export type DbTicket = Omit<ITicket, 'airline' | 'source' | 'destination'> & {
+  airlineId: number;
+  sourceId: number;
+  destinationId: number;
+};
 
 // GET /tickets/client
 export type GetClientTicketListQueryParams = IClientQueryParams;
@@ -18,3 +28,6 @@ export type GetAdminTicketListResponse = AdminResponse;
 
 // DELETE /tickets/admin
 export type DeleteAdminTicketsQueryParams = IDeleteTicketsRequest;
+
+// POST /tickets/admin
+export { CreateNewTicketRequest };

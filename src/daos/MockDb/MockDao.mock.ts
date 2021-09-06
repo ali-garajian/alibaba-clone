@@ -2,13 +2,13 @@ import jsonfile from 'jsonfile';
 import { IUser } from '@entities/User';
 import { IdTitleModel } from 'client/src/types/base/IdTitleModel';
 import { IAirline } from 'client/src/types/models/Airline';
-import { ITicket } from 'client/src/types/models/Ticket';
+import { DbTicket } from '@models/Ticket';
 
 interface IDatabase {
   users: IUser[];
   cities: IdTitleModel[];
   airlines: IAirline[];
-  tickets: ITicket[];
+  tickets: DbTicket[];
 }
 
 class MockDaoMock {

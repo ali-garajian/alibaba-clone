@@ -1,12 +1,18 @@
 import { ITicketDao } from './TicketDao';
 import MockDaoMock from '../MockDb/MockDao.mock';
-import { EFlightClass, ETicketType } from 'client/src/types/models/Ticket';
+import {
+  EFlightClass,
+  ETicketType,
+  ITicket,
+} from 'client/src/types/models/Ticket';
 import {
   GetClientTicketListQueryParams,
   GetClientTicketListResponse,
   GetAdminTicketListQueryParams,
   GetAdminTicketListResponse,
   DeleteAdminTicketsQueryParams,
+  CreateNewTicketRequest,
+  DbTicket,
 } from '@models/Ticket';
 
 class TicketDao extends MockDaoMock implements ITicketDao {
@@ -16,14 +22,22 @@ class TicketDao extends MockDaoMock implements ITicketDao {
     const db = await super.openDb();
     const passengers = queries.passengers;
 
-    const tickets = db.tickets.filter(
-      (t) =>
-        t.source.id === +queries.source &&
-        t.destination.id === +queries.destination &&
-        new Date(queries.departureDate).toDateString() ===
-          new Date(t.departureDate).toDateString() &&
-        t.quantity >= +passengers.adult + +passengers.child + +passengers.infant
-    );
+    const tickets: ITicket[] = db.tickets
+      .filter(
+        (t) =>
+          t.sourceId === +queries.source &&
+          t.destinationId === +queries.destination &&
+          new Date(queries.departureDate).toDateString() ===
+            new Date(t.departureDate).toDateString() &&
+          t.quantity >=
+            +passengers.adult + +passengers.child + +passengers.infant
+      )
+      .map((t) => ({
+        ...t,
+        airline: db.airlines.find((i) => i.id === t.airlineId)!,
+        source: db.cities.find((i) => i.id === t.sourceId)!,
+        destination: db.cities.find((i) => i.id === t.destinationId)!,
+      }));
 
     const dates: GetClientTicketListResponse['dates'] = Array.from(
       { length: 21 },
@@ -59,23 +73,23 @@ class TicketDao extends MockDaoMock implements ITicketDao {
     const db = await super.openDb();
     const tickets = db.tickets.filter((t) =>
       queries.source
-        ? t.source.id === +queries.source
+        ? t.sourceId === +queries.source
         : true && queries.destination
-        ? t.destination.id === +queries.destination
+        ? t.destinationId === +queries.destination
         : true && queries.departureDate
         ? new Date(queries.departureDate).toDateString() ===
           new Date(t.departureDate).toDateString()
         : true
     );
 
-    return tickets.map((ticket, index) => ({
+    return tickets.map((ticket) => ({
       ...ticket,
       ticketType:
         ticket.ticketType === ETicketType.Charters ? 'چارتر' : 'سیستمی',
-      airline: ticket.airline.name,
+      airline: db.airlines.find((i) => i.id === ticket.airlineId)!.name,
       class: ticket.class === EFlightClass.Buisiness ? 'بیزینس' : 'اکونومی',
-      source: ticket.source.title,
-      destination: ticket.destination.title,
+      source: db.cities.find((i) => i.id === ticket.sourceId)!.title,
+      destination: db.cities.find((i) => i.id === ticket.destinationId)!.title,
       price: ticket.price * 1000,
     }));
   }
@@ -88,6 +102,23 @@ class TicketDao extends MockDaoMock implements ITicketDao {
       ...db,
       tickets: filteredTickets,
     });
+  }
+
+  public async createTicket(req: CreateNewTicketRequest) {
+    const db = await super.openDb();
+    const newTicket: DbTicket = {
+      id: Math.random().toString(32).substr(2, 5),
+      ...req,
+    };
+    const tickets = db.tickets;
+    tickets.unshift(newTicket);
+
+    await super.saveDb({
+      ...db,
+      tickets,
+    });
+
+    return newTicket;
   }
 }
 

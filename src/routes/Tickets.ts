@@ -9,6 +9,8 @@ import {
   GetAdminTicketListQueryParams,
   GetAdminTicketListResponse,
   DeleteAdminTicketsQueryParams,
+  CreateNewTicketRequest,
+  DbTicket,
 } from '@models/Ticket';
 import { EMessages } from '@shared/messages';
 
@@ -42,5 +44,16 @@ export async function deleteTickets(
   await ticketDao.deleteTickets(req.query);
   return res.status(OK).json({
     msg: EMessages.OperationSuccessfull,
+  });
+}
+
+export async function createTicket(
+  req: Request<any, any, CreateNewTicketRequest>,
+  res: Response<IResponseModel<DbTicket>>
+) {
+  const ticket = await ticketDao.createTicket(req.body);
+  return res.status(OK).json({
+    msg: EMessages.OperationSuccessfull,
+    data: ticket,
   });
 }

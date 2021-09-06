@@ -7,12 +7,13 @@ import { JwtService } from '@shared/JwtService';
 import { cookieProps, pwdSaltRounds } from '@shared/constants';
 import { IResponseModel } from '@entities/base/ResponseModel';
 import { EMessages } from '@shared/messages';
+import { AdminRequest } from 'src/@types/express';
 
 const userDao = new UserDao();
 const jwtService = new JwtService();
 const { BAD_REQUEST, OK, UNAUTHORIZED, INTERNAL_SERVER_ERROR } = StatusCodes;
 
-export async function login(req: Request, res: Response<IResponseModel>) {
+export async function login(req: AdminRequest, res: Response<IResponseModel>) {
   // Check email and password present
   const { email, password, role } = req.body;
   if (!(email && password)) {

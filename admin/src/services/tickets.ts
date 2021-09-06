@@ -3,6 +3,8 @@ import {
   IGetTicketListQueryParams,
   GetTicketListResponse,
   IDeleteTicketsRequest,
+  CreateNewTicketRequest,
+  CreateNewTicketResponse,
 } from 'types/models/Ticket';
 
 export default class TicketsApi extends ApiService {
@@ -14,5 +16,11 @@ export default class TicketsApi extends ApiService {
 
   static async deleteTickets(req: IDeleteTicketsRequest): ApiResponse<{}> {
     return await this.axios.delete('/tickets/admin', { params: req });
+  }
+
+  static async createTicket(
+    req: CreateNewTicketRequest
+  ): ApiResponse<CreateNewTicketResponse> {
+    return await this.axios.post('/tickets/admin', req);
   }
 }

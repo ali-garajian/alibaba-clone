@@ -26,6 +26,10 @@ export const SidebarItems: ISidebarItem[] = [
         title: 'لیست بلیط ها',
         url: RoutesList.TicketList,
       },
+      {
+        title: 'افزودن بلیط',
+        url: RoutesList.AddTicket,
+      },
     ],
   },
 ];
