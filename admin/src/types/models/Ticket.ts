@@ -56,7 +56,7 @@ export type GetTicketListResponse = Array<TicketTableRepresentation>;
 
 // GET /ticktes/admin
 export interface IDeleteTicketsRequest {
-  ids: string[];
+  ids: number[];
 }
 
 // POST /tickets/admin
