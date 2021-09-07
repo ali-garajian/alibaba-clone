@@ -92,7 +92,7 @@ export default function useTicketListData() {
           },
         });
       }
-    } catch (e) {
+    } catch (e: any) {
       setError(e.message ?? 'خطایی در برنامه رخ داده است');
     } finally {
       setIsLoading(false);
@@ -137,7 +137,7 @@ export default function useTicketListData() {
         .sort((t1, t2) => {
           switch (sortingCriteria.value) {
             case ESortingCriterias.Default: {
-              return t1.id.localeCompare(t2.id);
+              return t1.id - t2.id;
             }
 
             case ESortingCriterias.Departure: {

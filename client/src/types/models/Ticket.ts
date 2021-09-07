@@ -19,7 +19,7 @@ export interface IPassengers {
   infant: number;
 }
 export interface ITicket {
-  id: string;
+  id: number;
   ticketType: ETicketType;
   airline: IAirline;
   airplane: string;

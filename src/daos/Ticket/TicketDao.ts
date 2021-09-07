@@ -78,9 +78,9 @@ export class TicketDao implements ITicketDao {
         +queries.source,
         +queries.destination,
         new Date(queries.departureDate).toISOString().substr(0, 10),
-        +queries.passengers.adult +
-          +queries.passengers.child +
-          +queries.passengers.infant,
+        +(queries.passengers.adult || '') +
+          +(queries.passengers.child || '') +
+          +(queries.passengers.infant || ''),
       ]
     );
     // TODO: the start date in the query is hard-coded for demo purposes
