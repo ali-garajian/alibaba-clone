@@ -88,14 +88,14 @@ export class TicketDao implements ITicketDao {
       connection,
       `
       SELECT 
-          departureDate as date,
-          min(price) as price
+          departureDate AS date, MIN(price) AS price
       FROM
           tbl_tickets
-      where DATE_FORMAT(departureDate, '%Y-%m-%d') >= '2021-08-20' 
-      group by departureDate
-      order by departureDate asc
-      limit 21
+      WHERE
+          DATE_FORMAT(departureDate, '%Y-%m-%d') >= '2021-08-20'
+      GROUP BY DATE_FORMAT(departureDate, '%Y-%m-%d')
+      ORDER BY departureDate ASC
+      LIMIT 21
       `
     );
 

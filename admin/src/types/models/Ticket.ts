@@ -15,7 +15,7 @@ export enum EFlightClass {
   Economy = 'Economy',
 }
 export interface ITicket {
-  id: string;
+  id: number;
   ticketType: ETicketType;
   airline: IAirline;
   airplane: string;
