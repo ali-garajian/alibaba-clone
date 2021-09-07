@@ -10,7 +10,6 @@
     "client:admin": "node start-admin",
     "start": "concurrently \"yarn server:dev\" \"yarn client\"",
     "admin": "concurrently \"yarn server:dev\" \"yarn client:admin\"",
-    "proj": "concurrently \"yarn server:dev\" \"yarn client\" \"yarn client:admin\"",
     "test": "nodemon --config ./spec/nodemon.json",
     "test:no-reloading": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./spec"
   },
