@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { Box, TextField } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { AuthApi } from '@alibaba-clone/core';
+import { AuthApi, isAuthenticated, sanitizeEmail } from '@alibaba-clone/core';
 
 import { RoutesList } from 'routes/routesList';
 import { IAuthSlice } from 'data/auth';
 import useStore from 'data/Store';
-import { isAuthenticated, sanitizeEmail } from 'utils';
 import CustomButton from 'components/CustomButton';
 
 const authSelector = (state: IAuthSlice) => state.setIsLoggedIn;

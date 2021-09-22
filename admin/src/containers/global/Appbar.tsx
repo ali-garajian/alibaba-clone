@@ -22,14 +22,13 @@ import {
 import shallow from 'zustand/shallow';
 import clsx from 'clsx';
 import { useHistory } from 'react-router-dom';
-import { AuthApi } from '@alibaba-clone/core';
+import { AuthApi, isAuthenticated } from '@alibaba-clone/core';
 
 import { RoutesList } from 'routes/routesList';
 import Gap from 'components/Gap';
 import { IApplicationSlice } from 'data/application';
 import useStore, { IAuthSlice } from 'data/Store';
 import { drawerWidth } from './Sidebar';
-import { isAuthenticated } from 'utils';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
