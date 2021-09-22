@@ -1,7 +1,7 @@
 import MuiDataTable, { MUIDataTableColumn } from 'mui-datatables';
 import useSwr from 'swr';
+import { TicketsApi } from '@alibaba-clone/core';
 
-import { TicketsApi } from 'services';
 import { MuiDataTableFALocalization } from 'utils/MuiTableLocalization';
 
 const columns: MUIDataTableColumn[] = [
@@ -22,7 +22,7 @@ function TicketListPage() {
 	const { data, mutate } = useSwr(
 		`/tickets`,
 		() =>
-			TicketsApi.getTicketList({
+			TicketsApi.getAdminTicketList({
 				// TODO: impl. pagination
 				page: 1,
 			}),

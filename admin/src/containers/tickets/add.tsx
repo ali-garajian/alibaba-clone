@@ -7,13 +7,17 @@ import useSwr, { mutate } from 'swr';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { format } from 'date-fns-jalali';
-import { EFlightClass, ETicketType } from '@alibaba-clone/core';
+import {
+	EFlightClass,
+	ETicketType,
+	AirlineApi,
+	CitiesApi,
+	TicketsApi,
+} from '@alibaba-clone/core';
 
 import FormTextInput from 'components/FormTextInput';
 import FormComboBox from 'components/FormComboBox';
 import FormDatePicker from 'components/FormDatePicker';
-import AirlineApi from 'services/airline';
-import { CitiesApi, TicketsApi } from 'services';
 import CustomButton from 'components/CustomButton';
 import { RoutesList } from 'routes/routesList';
 import { AddTicketForm } from 'types';
