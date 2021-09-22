@@ -5,12 +5,12 @@ import Banner from './layouts/Banner';
 import { Box } from '@material-ui/core';
 
 export default function HomePage() {
-  return (
-    <Box bgcolor="#fff">
-      <Banner />
-      <FeatureBox />
-      <Content />
-      <QuestionFrequently />
-    </Box>
-  );
+	return (
+		<Box bgcolor="#fff">
+			<Banner />
+			<FeatureBox />
+			<Content />
+			<QuestionFrequently />
+		</Box>
+	);
 }
