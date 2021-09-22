@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { IResponseModel } from 'types'
+import { IResponseModel } from '../types'
 
 export const baseURL = 'http://localhost:3000/api'
 const axiosInstance = axios.create({

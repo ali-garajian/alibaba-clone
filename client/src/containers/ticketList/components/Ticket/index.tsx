@@ -6,9 +6,13 @@ import {
 	ExpandLess as ExpandLessIcon,
 } from '@material-ui/icons';
 import { format } from 'date-fns-jalali';
-import { MoneyFormat, ETicketType, ITicket } from '@alibaba-clone/core';
+import {
+	MoneyFormat,
+	ETicketType,
+	ITicket,
+	Conditional,
+} from '@alibaba-clone/core';
 
-import Conditional from 'components/Conditional';
 import useStyles from './styles';
 import { ISearchOptionsSlice } from 'data/SearchOptions';
 import useStore from 'data/Store';

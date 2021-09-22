@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { TextField, makeStyles, TextFieldProps } from '@material-ui/core'
 import { LocationOnOutlined as LocationOnOutlinedIcon } from '@material-ui/icons'
 import { Autocomplete, AutocompleteProps } from '@material-ui/lab'
-import { IdTitleModel } from '@alibaba-clone/core'
+
+import { IdTitleModel } from 'types'
 
 const useStyles = makeStyles({
     startAdornment: {
