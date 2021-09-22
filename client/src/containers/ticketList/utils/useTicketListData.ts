@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import shallow from 'zustand/shallow';
 import debounce from 'lodash/debounce';
+import { TicketsApi } from '@alibaba-clone/core';
 
 import useStore, {
 	ISearchOptionsSlice,
@@ -8,7 +9,6 @@ import useStore, {
 	RootState,
 } from 'data/Store';
 import _CACHE from 'data/_CACHE';
-import TicketsApi from 'service/tickets';
 import { ESortingCriterias } from 'data/Sorting';
 import { ITicket } from '@alibaba-clone/core';
 
@@ -67,7 +67,7 @@ export default function useTicketListData() {
 					},
 				});
 			} else {
-				const response = await TicketsApi.getTicketListData({
+				const response = await TicketsApi.getClientTicketListData({
 					source,
 					destination,
 					departureDate: departureDate.toISOString(),

@@ -1,7 +1,9 @@
 import { StateCreator } from 'zustand';
-import { ITicket, IGetClientTicketListResponse } from '@alibaba-clone/core';
-
-import { ApiResponseContent } from 'service/_base';
+import {
+	ITicket,
+	IGetClientTicketListResponse,
+	ApiResponseContent,
+} from '@alibaba-clone/core';
 
 export interface ITicketSlice {
 	selectedTicket: ITicket | null;

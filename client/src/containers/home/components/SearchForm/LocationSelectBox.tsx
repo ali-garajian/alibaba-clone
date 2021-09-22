@@ -2,11 +2,9 @@ import { makeStyles, Divider, Theme } from '@material-ui/core';
 import { SyncAlt as SyncAltIcon } from '@material-ui/icons';
 import { Box } from '@material-ui/core';
 import clsx from 'clsx';
-import { IdTitleModel } from '@alibaba-clone/core';
+import { IdTitleModel, CitiesApi } from '@alibaba-clone/core';
 
-import _CACHE from 'data/_CACHE';
 import { AsyncAutocomplete } from 'components/AsyncAutocomplete';
-import CitiesApi from 'service/cities';
 
 const useStyles = makeStyles((theme: Theme) => ({
 	comboBoxInputRoot: {

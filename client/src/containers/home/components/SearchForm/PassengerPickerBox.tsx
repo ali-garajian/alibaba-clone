@@ -3,7 +3,6 @@ import {
 	Box,
 	Popper,
 	Fade,
-	Typography,
 	makeStyles,
 	Paper,
 	ClickAwayListener,
