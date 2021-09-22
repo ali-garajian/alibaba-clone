@@ -1,5 +1,5 @@
-import { IGetCitiesQueryParams, GetCitiesResponse } from '@entities/City';
+import { IGetCitiesQueryParams, GetCitiesResponse } from '@alibaba-clone/core';
 
 export interface ICityDao {
-  getAllCities(queries: IGetCitiesQueryParams): Promise<GetCitiesResponse>;
+	getAllCities(queries: IGetCitiesQueryParams): Promise<GetCitiesResponse>;
 }

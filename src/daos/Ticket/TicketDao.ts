@@ -1,38 +1,36 @@
+import { DbTicket, convertToITicket, IRawDbITicket } from '@models/Ticket';
 import {
-  GetClientTicketListQueryParams,
-  GetClientTicketListResponse,
-  GetAdminTicketListQueryParams,
-  GetAdminTicketListResponse,
-  DeleteAdminTicketsQueryParams,
-  CreateNewTicketRequest,
-  DbTicket,
-  convertToITicket,
-  IRawDbITicket,
-} from '@models/Ticket';
+	IDate,
+	IGetClientTicketListQueryParams,
+	IGetClientTicketListResponse,
+	IGetAdminTicketListQueryParams,
+	GetAdminTicketListResponse,
+	IDeleteTicketsRequest,
+	CreateNewTicketRequest,
+} from '@alibaba-clone/core';
 
 import connection, { query } from '../db';
-import { IDate } from 'client/src/types/models/Ticket';
 
 export interface ITicketDao {
-  getTicketsAndDates(
-    queries: GetClientTicketListQueryParams
-  ): Promise<GetClientTicketListResponse>;
+	getTicketsAndDates(
+		queries: IGetClientTicketListQueryParams
+	): Promise<IGetClientTicketListResponse>;
 
-  getAllTickets(
-    queries: GetAdminTicketListQueryParams
-  ): Promise<GetAdminTicketListResponse>;
+	getAllTickets(
+		queries: IGetAdminTicketListQueryParams
+	): Promise<GetAdminTicketListResponse>;
 
-  deleteTickets(req: DeleteAdminTicketsQueryParams): Promise<void>;
-  createTicket(req: CreateNewTicketRequest): Promise<DbTicket>;
+	deleteTickets(req: IDeleteTicketsRequest): Promise<void>;
+	createTicket(req: CreateNewTicketRequest): Promise<DbTicket>;
 }
 
 export class TicketDao implements ITicketDao {
-  async getTicketsAndDates(
-    queries: GetClientTicketListQueryParams
-  ): Promise<GetClientTicketListResponse> {
-    const tickets = await query<IRawDbITicket[]>(
-      connection,
-      `
+	async getTicketsAndDates(
+		queries: IGetClientTicketListQueryParams
+	): Promise<IGetClientTicketListResponse> {
+		const tickets = await query<IRawDbITicket[]>(
+			connection,
+			`
       SELECT 
         tbl_tickets.id,
         tbl_tickets.airlineId,
@@ -64,29 +62,29 @@ export class TicketDao implements ITicketDao {
               destinationId = ? AND 
               DATE_FORMAT(departureDate, '%Y-%m-%d') = ? AND
               ${
-                queries.returnDate
-                  ? `DATE_FORMAT(arrivalDate, '%Y-%m-%d') = ${new Date(
-                      queries.returnDate
-                    )
-                      .toISOString()
-                      .substr(0, 10)} AND`
-                  : ''
-              } 
+								queries.returnDate
+									? `DATE_FORMAT(arrivalDate, '%Y-%m-%d') = ${new Date(
+											queries.returnDate
+									  )
+											.toISOString()
+											.substr(0, 10)} AND`
+									: ''
+							} 
               quantity >= ?
       `,
-      [
-        +queries.source,
-        +queries.destination,
-        new Date(queries.departureDate).toISOString().substr(0, 10),
-        +(queries.passengers.adult || '') +
-          +(queries.passengers.child || '') +
-          +(queries.passengers.infant || ''),
-      ]
-    );
-    // TODO: the start date in the query is hard-coded for demo purposes
-    const dates = await query<IDate[]>(
-      connection,
-      `
+			[
+				+queries.source,
+				+queries.destination,
+				new Date(queries.departureDate).toISOString().substr(0, 10),
+				+(queries.passengers.adult || '') +
+					+(queries.passengers.child || '') +
+					+(queries.passengers.infant || ''),
+			]
+		);
+		// TODO: the start date in the query is hard-coded for demo purposes
+		const dates = await query<IDate[]>(
+			connection,
+			`
       SELECT 
           departureDate AS date, MIN(price) AS price
       FROM
@@ -97,20 +95,20 @@ export class TicketDao implements ITicketDao {
       ORDER BY departureDate ASC
       LIMIT 21
       `
-    );
+		);
 
-    return {
-      tickets: tickets.map(convertToITicket),
-      dates,
-    };
-  }
-  async getAllTickets(
-    queries: GetAdminTicketListQueryParams
-  ): Promise<GetAdminTicketListResponse> {
-    // TODO: add pagination
-    const tickets = await query<any[]>(
-      connection,
-      `
+		return {
+			tickets: tickets.map(convertToITicket),
+			dates,
+		};
+	}
+	async getAllTickets(
+		queries: IGetAdminTicketListQueryParams
+	): Promise<GetAdminTicketListResponse> {
+		// TODO: add pagination
+		const tickets = await query<any[]>(
+			connection,
+			`
       SELECT 
         tbl_tickets.id,
         tbl_airlines.name as airline,
@@ -134,49 +132,49 @@ export class TicketDao implements ITicketDao {
                   INNER JOIN
               tbl_cities AS tbl_cities_dest ON tbl_tickets.destinationId = tbl_cities_dest.id
           ${
-            queries.source || queries.destination || queries.departureDate
-              ? 'WHERE'
-              : ''
-          }
+						queries.source || queries.destination || queries.departureDate
+							? 'WHERE'
+							: ''
+					}
               ${queries.source ? 'sourceId = ? AND' : ''} 
               ${queries.destination ? 'destinationId = ? AND' : ''} 
               ${
-                queries.departureDate
-                  ? `DATE_FORMAT(departureDate, '%Y-%m-%d') = ?`
-                  : ''
-              }
+								queries.departureDate
+									? `DATE_FORMAT(departureDate, '%Y-%m-%d') = ?`
+									: ''
+							}
       `,
-      [
-        +(queries.source ?? ''),
-        +(queries.destination ?? ''),
-        queries.departureDate
-          ? new Date(queries.departureDate).toISOString().substr(0, 10)
-          : null,
-      ]
-    );
+			[
+				+(queries.source ?? ''),
+				+(queries.destination ?? ''),
+				queries.departureDate
+					? new Date(queries.departureDate).toISOString().substr(0, 10)
+					: null,
+			]
+		);
 
-    return tickets;
-  }
-  async deleteTickets(req: DeleteAdminTicketsQueryParams): Promise<void> {
-    await query<any>(
-      connection,
-      `
+		return tickets;
+	}
+	async deleteTickets(req: IDeleteTicketsRequest): Promise<void> {
+		await query<any>(
+			connection,
+			`
       DELETE FROM tbl_tickets 
       WHERE id = ?  
       `,
-      req.ids.map((i) => +i)
-    );
-  }
-  async createTicket(req: CreateNewTicketRequest): Promise<DbTicket> {
-    const result = await query<any>(
-      connection,
-      `INSERT INTO tbl_tickets set ?`,
-      req
-    );
+			req.ids.map((i) => +i)
+		);
+	}
+	async createTicket(req: CreateNewTicketRequest): Promise<DbTicket> {
+		const result = await query<any>(
+			connection,
+			`INSERT INTO tbl_tickets set ?`,
+			req
+		);
 
-    return {
-      ...req,
-      id: result.insertId,
-    };
-  }
+		return {
+			...req,
+			id: result.insertId,
+		};
+	}
 }

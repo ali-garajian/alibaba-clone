@@ -1,20 +1,21 @@
+import { GetCitiesResponse, IGetCitiesQueryParams } from '@alibaba-clone/core';
+
 import { ICityDao } from './CityDao';
 import MockDaoMock from '../MockDb/MockDao.mock';
-import { GetCitiesResponse, IGetCitiesQueryParams } from '@entities/City';
 
 class CityDao extends MockDaoMock implements ICityDao {
-  public async getAllCities(
-    queries: IGetCitiesQueryParams
-  ): Promise<GetCitiesResponse> {
-    const db = await super.openDb();
+	public async getAllCities(
+		queries: IGetCitiesQueryParams
+	): Promise<GetCitiesResponse> {
+		const db = await super.openDb();
 
-    let cities = db.cities;
-    if (queries.q?.trim()) {
-      cities = cities.filter((city) => city.title.includes(queries.q!));
-    }
+		let cities = db.cities;
+		if (queries.q?.trim()) {
+			cities = cities.filter((city) => city.title.includes(queries.q!));
+		}
 
-    return cities;
-  }
+		return cities;
+	}
 }
 
 export default CityDao;

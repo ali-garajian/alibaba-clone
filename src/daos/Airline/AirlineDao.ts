@@ -1,5 +1,5 @@
-import { GetAdminAirlinesResponse } from '@models/Airline';
+import { GetAirlinesResponse } from '@alibaba-clone/core';
 
 export interface IAirlineDao {
-  getAirlinesAsOptions(): Promise<GetAdminAirlinesResponse>;
+	getAirlinesAsOptions(): Promise<GetAirlinesResponse>;
 }
