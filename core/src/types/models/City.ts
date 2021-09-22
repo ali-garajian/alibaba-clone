@@ -1,7 +1,7 @@
-import { IdTitleModel } from 'types/base/IdTitleModel';
+import { IdTitleModel } from '../base'
 
 // GET /cities
 export interface IGetCitiesQueryParams {
-  q?: string;
+    q?: string
 }
-export type GetCitiesResponse = IdTitleModel[];
+export type GetCitiesResponse = IdTitleModel[]
