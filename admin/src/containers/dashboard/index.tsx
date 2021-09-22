@@ -1,8 +1,7 @@
-import {} from '@material-ui/core';
-import CustomTypography from 'components/CustomTypography';
+import { CustomTypography } from '@alibaba-clone/core';
 
 function DashboardPage() {
-  return <CustomTypography>به پنل مدیریت علی بابا خوش آمدید</CustomTypography>;
+	return <CustomTypography>به پنل مدیریت علی بابا خوش آمدید</CustomTypography>;
 }
 
 export default DashboardPage;

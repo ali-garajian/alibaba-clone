@@ -13,12 +13,12 @@ import {
 	AirlineApi,
 	CitiesApi,
 	TicketsApi,
+	FormTextInput,
+	FormComboBox,
+	FormDatePicker,
+	CustomButton,
 } from '@alibaba-clone/core';
 
-import FormTextInput from 'components/FormTextInput';
-import FormComboBox from 'components/FormComboBox';
-import FormDatePicker from 'components/FormDatePicker';
-import CustomButton from 'components/CustomButton';
 import { RoutesList } from 'routes/routesList';
 import { AddTicketForm } from 'types';
 

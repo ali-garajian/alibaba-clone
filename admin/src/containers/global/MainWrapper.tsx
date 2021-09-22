@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
 import { CssBaseline, Box, makeStyles, Theme } from '@material-ui/core';
 import shallow from 'zustand/shallow';
-import { isAuthenticated } from '@alibaba-clone/core';
+import { isAuthenticated, Conditional } from '@alibaba-clone/core';
 
 import AppProviders from 'providers';
 import Appbar from './Appbar';
 import Sidebar from './Sidebar/index';
 import { IAuthSlice } from 'data/auth';
 import useStore from 'data/Store';
-import Conditional from 'components/Conditional';
 
 const useStyles = makeStyles((theme: Theme) => ({
 	toolbar: {

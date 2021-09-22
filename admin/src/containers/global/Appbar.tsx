@@ -22,10 +22,9 @@ import {
 import shallow from 'zustand/shallow';
 import clsx from 'clsx';
 import { useHistory } from 'react-router-dom';
-import { AuthApi, isAuthenticated } from '@alibaba-clone/core';
+import { AuthApi, isAuthenticated, Gap } from '@alibaba-clone/core';
 
 import { RoutesList } from 'routes/routesList';
-import Gap from 'components/Gap';
 import { IApplicationSlice } from 'data/application';
 import useStore, { IAuthSlice } from 'data/Store';
 import { drawerWidth } from './Sidebar';

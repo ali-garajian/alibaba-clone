@@ -2,9 +2,13 @@ import { makeStyles, Divider, Theme } from '@material-ui/core';
 import { SyncAlt as SyncAltIcon } from '@material-ui/icons';
 import { Box } from '@material-ui/core';
 import clsx from 'clsx';
-import { IdTitleModel, CitiesApi } from '@alibaba-clone/core';
+import {
+	IdTitleModel,
+	CitiesApi,
+	AsyncAutocomplete,
+} from '@alibaba-clone/core';
 
-import { AsyncAutocomplete } from 'components/AsyncAutocomplete';
+import _CACHE from 'data/_CACHE';
 
 const useStyles = makeStyles((theme: Theme) => ({
 	comboBoxInputRoot: {
@@ -77,6 +81,7 @@ function LocationSelectBox({
 	return (
 		<Box display="flex" position="relative" width="480px">
 			<AsyncAutocomplete
+				_CACHE={_CACHE}
 				cacheKey="source-combobox"
 				value={source}
 				onChange={(_, value) => onSourceChange(value)}
@@ -95,6 +100,7 @@ function LocationSelectBox({
 				onClick={onToggle}
 			/>
 			<AsyncAutocomplete
+				_CACHE={_CACHE}
 				cacheKey="destination-combobox"
 				value={destination}
 				onChange={(_, value) => onDestinationChange(value)}
