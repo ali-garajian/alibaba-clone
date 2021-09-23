@@ -1,5 +1,5 @@
 import { ApiService, ApiResponse } from './_base'
-import { ILoginRequest, EUserRoles } from 'types'
+import { ILoginRequest, EUserRoles } from '../types'
 
 export default class AuthApi extends ApiService {
     static async login(req: ILoginRequest): ApiResponse<Record<string, never>> {

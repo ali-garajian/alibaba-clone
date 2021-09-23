@@ -1,5 +1,5 @@
 import { ApiService, ApiResponse } from './_base'
-import { IGetCitiesQueryParams, GetCitiesResponse } from 'types'
+import { IGetCitiesQueryParams, GetCitiesResponse } from '../types'
 
 export default class CitiesApi extends ApiService {
     static async getCities(

@@ -7,7 +7,7 @@ import {
     CreateNewTicketResponse,
     IGetClientTicketListQueryParams,
     IGetClientTicketListResponse,
-} from 'types'
+} from '../types'
 
 export default class TicketsApi extends ApiService {
     static async getClientTicketListData(

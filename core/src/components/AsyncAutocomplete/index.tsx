@@ -3,7 +3,7 @@ import { TextField, makeStyles, TextFieldProps } from '@material-ui/core'
 import { LocationOnOutlined as LocationOnOutlinedIcon } from '@material-ui/icons'
 import { Autocomplete, AutocompleteProps } from '@material-ui/lab'
 
-import { IdTitleModel } from 'types'
+import { IdTitleModel } from '../../types'
 
 const useStyles = makeStyles({
     startAdornment: {
@@ -28,7 +28,7 @@ export function AsyncAutocomplete({
 }: IAsyncAutocompleteProps) {
     const classes = useStyles()
 
-    const [open, setOpen] = useState<boolean>(false)
+    const [open, setOpen] = useState(false)
     const [options, setOptions] = useState<IdTitleModel[]>([])
 
     const loading = open && !options.length

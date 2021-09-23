@@ -14,9 +14,8 @@ import { Close as CloseIcon } from '@material-ui/icons';
 import {
 	FieldArrayWithId,
 	Control,
-	DeepMap,
-	FieldError,
 	Controller,
+	FieldErrors,
 } from 'react-hook-form';
 import clsx from 'clsx';
 import { FormTextInput, FormComboBox, Conditional } from '@alibaba-clone/core';
@@ -74,7 +73,7 @@ const passengersSelector = (state: ISearchOptionsSlice) =>
 interface IPassengerInputCardProps {
 	field: FieldArrayWithId<IPassengersForm, 'passengers', 'id'>;
 	control: Control<IPassengersForm>;
-	errors: DeepMap<IPassengersForm, FieldError>;
+	errors: FieldErrors<IPassengersForm>;
 	index: number;
 	remove?: (index?: number | number[] | undefined) => void;
 }

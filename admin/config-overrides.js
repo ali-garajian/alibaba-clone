@@ -4,7 +4,21 @@ const {
 	override,
 	removeModuleScopePlugin,
 	babelInclude,
+	addWebpackAlias,
 } = require('customize-cra');
+
+const symlinkedPackageJson = fs
+	.readFileSync(
+		path.join(__dirname, 'node_modules', '@alibaba-clone/core', 'package.json')
+	)
+	.toString();
+const { peerDependencies } = JSON.parse(symlinkedPackageJson);
+
+const aliases = Object.keys(peerDependencies).reduce((acc, cur) => {
+	acc[cur] = fs.realpathSync(path.join(__dirname, 'node_modules', cur));
+
+	return acc;
+}, {});
 
 module.exports = override(
 	removeModuleScopePlugin(),
@@ -13,5 +27,8 @@ module.exports = override(
 		fs.realpathSync(
 			path.join(__dirname, 'node_modules/@alibaba-clone/core/src')
 		),
-	])
+	]),
+	addWebpackAlias({
+		...aliases,
+	})
 );
