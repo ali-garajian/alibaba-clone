@@ -2,12 +2,7 @@ import { Router } from 'express';
 import { adminMW, loggedInMW } from './middleware';
 import { login, logout, register } from './Auth';
 import { getAllUsers, addOneUser, updateOneUser, deleteOneUser } from './Users';
-import {
-  getAllTicketsAndDates,
-  getAllTickets,
-  deleteTickets,
-  createTicket,
-} from './Tickets';
+import ticketRouter from './Tickets/router';
 import { getAllCities } from './Cities';
 import { getAirlinesAsOptions } from './Airlines';
 
@@ -23,13 +18,6 @@ userRouter.get('/all', getAllUsers);
 userRouter.post('/add', addOneUser);
 userRouter.put('/update', updateOneUser);
 userRouter.delete('/delete/:id', deleteOneUser);
-
-// Ticket router
-const ticketRouter = Router();
-ticketRouter.get('/client', getAllTicketsAndDates);
-ticketRouter.get('/admin', adminMW, getAllTickets);
-ticketRouter.delete('/admin', adminMW, deleteTickets as any);
-ticketRouter.post('/admin', adminMW, createTicket);
 
 // City router
 const cityRouter = Router();

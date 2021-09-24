@@ -69,6 +69,7 @@
 			"@daos/*": ["src/daos/*"],
 			"@entities/*": ["src/entities/*"],
 			"@shared/*": ["src/shared/*"],
+			"@shared": ["src/shared/index"],
 			"@server": ["src/Server"],
 			"@models/*": ["src/models/*"]
 		}

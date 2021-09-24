@@ -1,6 +1,5 @@
 import StatusCodes from 'http-status-codes';
 import { Request, Response } from 'express';
-
 import {
 	IResponseModel,
 	IGetClientTicketListQueryParams,
@@ -10,6 +9,7 @@ import {
 	IDeleteTicketsRequest,
 	CreateNewTicketRequest,
 } from '@alibaba-clone/core';
+
 import { DbTicket } from '@models/Ticket';
 import { EMessages } from '@shared/messages';
 import { TicketDao } from '@daos/Ticket/TicketDao';
@@ -28,10 +28,12 @@ export async function getAllTicketsAndDates(
 }
 
 export async function getAllTickets(
-	req: Request<any, any, any, IGetAdminTicketListQueryParams>,
+	req: Request,
 	res: Response<IResponseModel<GetAdminTicketListResponse>>
 ) {
-	const tickets = await ticketDao.getAllTickets(req.query);
+	const tickets = await ticketDao.getAllTickets(
+		req.query as unknown as IGetAdminTicketListQueryParams
+	);
 	return res.status(OK).json({
 		data: tickets,
 	});

@@ -7,6 +7,7 @@ import {
 	GetAdminTicketListResponse,
 	IDeleteTicketsRequest,
 	CreateNewTicketRequest,
+	TicketTableRepresentation,
 } from '@alibaba-clone/core';
 
 import connection, { query } from '../db';
@@ -105,8 +106,13 @@ export class TicketDao implements ITicketDao {
 	async getAllTickets(
 		queries: IGetAdminTicketListQueryParams
 	): Promise<GetAdminTicketListResponse> {
-		// TODO: add pagination
-		const tickets = await query<any[]>(
+		/* 
+			TODO: 
+				1)add pagination 
+				2)move queries into stored procedures & call those instead 
+				3)add types for tickets
+		*/
+		const tickets = await query<TicketTableRepresentation[]>(
 			connection,
 			`
       SELECT 
@@ -145,12 +151,12 @@ export class TicketDao implements ITicketDao {
 							}
       `,
 			[
-				+(queries.source ?? ''),
-				+(queries.destination ?? ''),
+				queries.source,
+				queries.destination,
 				queries.departureDate
 					? new Date(queries.departureDate).toISOString().substr(0, 10)
 					: null,
-			]
+			].filter(Boolean)
 		);
 
 		return tickets;
