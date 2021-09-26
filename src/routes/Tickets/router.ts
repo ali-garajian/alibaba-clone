@@ -12,7 +12,10 @@ import validators from './validators';
 
 const ticketRouter = Router();
 
-ticketRouter.get('/client', actions.getAllTicketsAndDates);
+ticketRouter.get(
+	'/client/:type("train"|"flight")',
+	actions.getAllTicketsAndDates
+);
 ticketRouter.get(
 	'/admin',
 	adminMW,

@@ -8,6 +8,7 @@ import {
 	GetAdminTicketListResponse,
 	IDeleteTicketsRequest,
 	CreateNewTicketRequest,
+	ICommonTicketRoutePathParams,
 } from '@alibaba-clone/core';
 
 import { DbTicket } from '@models/Ticket';
@@ -18,10 +19,18 @@ const ticketDao = new TicketDao();
 const { OK } = StatusCodes;
 
 export async function getAllTicketsAndDates(
-	req: Request<any, any, any, IGetClientTicketListQueryParams>,
+	req: Request<
+		ICommonTicketRoutePathParams,
+		any,
+		any,
+		IGetClientTicketListQueryParams
+	>,
 	res: Response<IResponseModel<IGetClientTicketListResponse>>
 ) {
-	const ticketsListData = await ticketDao.getTicketsAndDates(req.query);
+	const ticketsListData = await ticketDao.getTicketsAndDates(
+		req.query,
+		req.params
+	);
 	return res.status(OK).json({
 		data: ticketsListData,
 	});

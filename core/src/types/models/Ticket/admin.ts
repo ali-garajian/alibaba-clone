@@ -1,5 +1,5 @@
 import { IPaginatedRequest } from '../../base'
-import { ITicket } from './_base'
+import { ITicket } from './base'
 
 // GET /tickets/admin
 export type TicketTableRepresentation = Pick<

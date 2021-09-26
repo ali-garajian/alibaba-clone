@@ -1,10 +1,6 @@
-import { IdTitleModel } from '../../base'
-import { IAirline } from '../Airline'
+import { IdTitleModel } from '../../../base'
+import { IAirline } from '../../Airline'
 
-export enum EFlightType {
-    OneWay = 'one-way',
-    TwoWay = 'two-way',
-}
 export enum ETicketType {
     Systematic = 'systematic',
     Charters = 'charters',
@@ -13,12 +9,8 @@ export enum EFlightClass {
     Buisiness = 'Buisiness',
     Economy = 'Economy',
 }
-export interface IPassengers {
-    adult: number
-    child: number
-    infant: number
-}
-export interface ITicket {
+
+export interface IFlightTicket {
     id: number
     ticketType: ETicketType
     airline: IAirline
@@ -32,8 +24,4 @@ export interface ITicket {
     terminalNumber: number
     price: number
     quantity: number
-}
-export interface IDate {
-    date: string
-    price: number
 }

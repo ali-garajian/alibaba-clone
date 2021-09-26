@@ -16,20 +16,6 @@ import connection, { query } from '../db';
 import { BaseTicketQueryHandler } from './utils/base';
 import { FlightTicketQueryHandler } from './utils/FlightTicketQueryHandler';
 
-export interface ITicketDao {
-	getTicketsAndDates(
-		queries: IGetClientTicketListQueryParams,
-		params: ICommonTicketRoutePathParams
-	): Promise<IGetClientTicketListResponse>;
-
-	getAllTickets(
-		queries: IGetAdminTicketListQueryParams
-	): Promise<GetAdminTicketListResponse>;
-
-	deleteTickets(req: IDeleteTicketsRequest): Promise<void>;
-	createTicket(req: CreateNewTicketRequest): Promise<DbTicket>;
-}
-
 export class TicketDao implements ITicketDao {
 	queryHandlers: Record<ETicketCategory, BaseTicketQueryHandler> = {
 		[ETicketCategory.Flight]: new FlightTicketQueryHandler(),
