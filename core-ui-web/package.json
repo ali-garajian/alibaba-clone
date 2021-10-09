@@ -1,0 +1,54 @@
+{
+    "name": "@alibaba-clone/core-ui-web",
+    "version": "0.1.0",
+    "description": "@alibaba/core-ui-web contains shared components between all web client projects",
+    "main": "./lib/index.js",
+    "author": "",
+    "license": "ISC",
+    "repository": {
+        "url": "git://github.com/ali-garajian/alibaba-clone.git"
+    },
+    "scripts": {
+        "lint": "eslint src/**/*.ts"
+    },
+    "devDependencies": {
+        "@testing-library/react-hooks": "^7.0.2",
+        "@types/fs-extra": "^9.0.11",
+        "@types/jest": "^26.0.23",
+        "@types/js-cookie": "^2.2.7",
+        "@types/lodash": "^4.14.172",
+        "@types/react": "^17.0.19",
+        "@typescript-eslint/eslint-plugin": "^4.30.0",
+        "@typescript-eslint/parser": "^4.30.0",
+        "eslint": "^7.32.0",
+        "eslint-plugin-jest": "^24.4.0",
+        "fs-extra": "^10.0.0",
+        "jest": "^27.0.6",
+        "prettier": "2.3.2",
+        "react-test-renderer": "^17.0.2",
+        "rimraf": "^3.0.2",
+        "ts-jest": "^27.0.3",
+        "ts-node": "^10.0.0",
+        "typescript": "^4.4.2",
+        "@material-ui/core": "^4.12.3",
+        "@material-ui/icons": "^4.11.2",
+        "@material-ui/lab": "^4.0.0-alpha.60",
+        "@material-ui/pickers": "^3.3.10",
+        "react-hook-form": "^7.12.2"
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "js-cookie": "^3.0.1",
+        "lodash": "^4.17.21",
+        "phone": "^3.1.6",
+        "date-fns-jalali": "^2.23.0-0"
+    },
+    "peerDependencies": {
+        "react": ">=16.8",
+        "react-hook-form": ">=7.0.0",
+        "@material-ui/core": ">=4.0",
+        "@material-ui/icons": ">=4.0",
+        "@material-ui/lab": ">=4.0",
+        "@material-ui/pickers": ">=3.0"
+    }
+}
