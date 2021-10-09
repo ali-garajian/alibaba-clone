@@ -1,3 +1,4 @@
+import { ETicketCategory } from 'core';
 import { Router } from 'express';
 
 import { adminMW } from '../middleware';
@@ -10,19 +11,32 @@ import validators from './validators';
     - query params are strings by default. Handle data types conversion
 */
 
+const ticketTypes = `${ETicketCategory.Flight}|${ETicketCategory.Train}`;
+
 const ticketRouter = Router();
 
 ticketRouter.get(
-	'/client/:type("train"|"flight")',
+	`/client/:type(${ticketTypes})`,
 	actions.getAllTicketsAndDates
 );
+
 ticketRouter.get(
-	'/admin',
+	`/admin/:type(${ticketTypes})`,
 	adminMW,
 	validators.getAllTickets,
-	actions.getAllTickets
+	actions.getAllTickets as any
 );
-ticketRouter.delete('/admin', adminMW, actions.deleteTickets as any);
-ticketRouter.post('/admin', adminMW, actions.createTicket);
+
+ticketRouter.delete(
+	`/admin/:type(${ticketTypes})`,
+	adminMW,
+	actions.deleteTickets as any
+);
+
+ticketRouter.post(
+	`/admin/:type(${ticketTypes})`,
+	adminMW,
+	actions.createTicket as any
+);
 
 export default ticketRouter;

@@ -17,6 +17,6 @@ export interface IDate {
     price: number
 }
 
-export interface ICommonTicketRoutePathParams {
+export interface ICommonTicketParams {
     type: ETicketCategory
 }

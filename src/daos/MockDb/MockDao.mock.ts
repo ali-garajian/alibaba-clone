@@ -1,13 +1,12 @@
 import jsonfile from 'jsonfile';
 import { IUser } from '@entities/User';
-import { IdTitleModel, IAirline } from '@alibaba-clone/core';
-import { DbTicket } from '@models/Ticket';
+import { IdTitleModel, IAirline, DbTicketModel } from '@alibaba-clone/core';
 
 interface IDatabase {
 	users: IUser[];
 	cities: IdTitleModel[];
 	airlines: IAirline[];
-	tickets: DbTicket[];
+	tickets: DbTicketModel[];
 }
 
 class MockDaoMock {

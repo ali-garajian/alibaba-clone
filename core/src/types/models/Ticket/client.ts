@@ -1,6 +1,6 @@
-import { IPassengers, IDate, IFlightTicket, ITrainTicket } from './base'
+import { IPassengers, IDate, Ticket } from './base'
 
-// GET /tickets
+// GET /tickets/:type
 export interface IGetClientTicketListQueryParams {
     source: number
     destination: number
@@ -10,5 +10,5 @@ export interface IGetClientTicketListQueryParams {
 }
 export interface IGetClientTicketListResponse {
     dates: Array<IDate>
-    tickets: Array<IFlightTicket | ITrainTicket>
+    tickets: Array<Ticket>
 }

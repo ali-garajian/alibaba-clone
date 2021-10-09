@@ -1,6 +1,4 @@
-export * from './Ticket/base'
-export * from './Ticket/client'
-export * from './Ticket/admin'
+export * from './Ticket'
 export * from './Airline'
 export * from './Auth'
 export * from './City'

@@ -25,3 +25,35 @@ export interface IFlightTicket {
     price: number
     quantity: number
 }
+
+export type FlightTicketTableRepresentation = Pick<
+    IFlightTicket,
+    | 'id'
+    | 'airplane'
+    | 'departureDate'
+    | 'terminalNumber'
+    | 'price'
+    | 'quantity'
+> &
+    Record<
+        'ticketType' | 'airline' | 'class' | 'source' | 'destination',
+        string
+    >
+
+export type CreateNewFlightTicketRequest = Omit<
+    IFlightTicket,
+    'id' | 'airline' | 'source' | 'destination'
+> & {
+    airlineId: number
+    sourceId: number
+    destinationId: number
+}
+
+export type DbFlightTicketModel = Omit<
+    IFlightTicket,
+    'airline' | 'source' | 'destination'
+> & {
+    airlineId: number
+    sourceId: number
+    destinationId: number
+}
