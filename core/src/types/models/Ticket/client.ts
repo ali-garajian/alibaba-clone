@@ -8,7 +8,9 @@ export interface IGetClientTicketListQueryParams {
     returnDate?: string
     passengers: IPassengers
 }
-export interface IGetClientTicketListResponse {
+export interface IGetClientTicketListResponse<
+    TicketType extends Ticket = Ticket
+> {
     dates: Array<IDate>
-    tickets: Array<Ticket>
+    tickets: Array<TicketType>
 }

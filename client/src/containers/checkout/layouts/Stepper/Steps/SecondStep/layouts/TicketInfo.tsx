@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Box, makeStyles, Paper, Theme, Grid } from '@material-ui/core';
 import { Info as InfoIcon } from '@material-ui/icons';
 import { format } from 'date-fns-jalali';
-import { EFlightClass, ITicket } from '@alibaba-clone/core';
+import { EFlightClass, IFlightTicket } from '@alibaba-clone/core';
 
 import useStore from 'data/Store';
 import { ITicketSlice } from 'data/Ticket';
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 	},
 }));
 
-function createTicketInfo(ticket: ITicket | null) {
+function createTicketInfo(ticket: IFlightTicket | null) {
 	if (!ticket) return null;
 
 	return [
@@ -73,7 +73,7 @@ function createTicketInfo(ticket: ITicket | null) {
 	];
 }
 
-const ticketInfoSelector = (state: ITicketSlice) => state.selectedTicket;
+const ticketInfoSelector = (state: ITicketSlice) => state.selectedFlightTicket;
 
 function TicketInfo() {
 	const classes = useStyles();

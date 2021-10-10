@@ -1,6 +1,6 @@
 import { useForm, useFieldArray } from 'react-hook-form';
 import shallow from 'zustand/shallow';
-import { ComboEntry } from '@alibaba-clone/core';
+import { ComboEntry } from '@alibaba-clone/core-ui-web';
 
 import useStore, { RootState } from 'data/Store';
 import PassengersFormBody from './Body';

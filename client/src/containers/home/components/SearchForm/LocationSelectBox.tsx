@@ -2,11 +2,8 @@ import { makeStyles, Divider, Theme } from '@material-ui/core';
 import { SyncAlt as SyncAltIcon } from '@material-ui/icons';
 import { Box } from '@material-ui/core';
 import clsx from 'clsx';
-import {
-	IdTitleModel,
-	CitiesApi,
-	AsyncAutocomplete,
-} from '@alibaba-clone/core';
+import { IdTitleModel, CitiesApi } from '@alibaba-clone/core';
+import { AsyncAutocomplete } from '@alibaba-clone/core-ui-web';
 
 import _CACHE from 'data/_CACHE';
 

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Box, Button } from '@material-ui/core';
-import { Conditional } from '@alibaba-clone/core';
+import { Conditional } from '@alibaba-clone/core-ui-web';
 
 import Ticket from '../components/Ticket/index';
 import Sorting from './Sorting';
@@ -13,7 +13,7 @@ import useTicketListData, {
 } from '../utils/useTicketListData';
 import shallow from 'zustand/shallow';
 
-const ticketSelector = (state: ITicketSlice) => state.setSelectedTicket;
+const ticketSelector = (state: ITicketSlice) => state.setSelectedFlightTicket;
 
 interface ITicketListProps {}
 function TicketList({}: ITicketListProps) {

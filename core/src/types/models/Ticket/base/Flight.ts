@@ -1,7 +1,7 @@
 import { IdTitleModel } from '../../../base'
 import { IAirline } from '../../Airline'
 
-export enum ETicketType {
+export enum EFlightTicketType {
     Systematic = 'systematic',
     Charters = 'charters',
 }
@@ -12,7 +12,7 @@ export enum EFlightClass {
 
 export interface IFlightTicket {
     id: number
-    ticketType: ETicketType
+    ticketType: EFlightTicketType
     airline: IAirline
     airplane: string
     class: EFlightClass

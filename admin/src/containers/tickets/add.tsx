@@ -9,10 +9,10 @@ import DateFnsUtils from '@date-io/date-fns';
 import { format } from 'date-fns-jalali';
 import {
 	EFlightClass,
-	ETicketType,
+	EFlightTicketType,
 	AirlineApi,
 	CitiesApi,
-	TicketsApi,
+	FlightTicketsApi,
 } from '@alibaba-clone/core';
 import {
 	FormTextInput,
@@ -79,12 +79,14 @@ function AddTicketPage() {
 				arrivalDate,
 				...rest
 			} = data;
-			const response = await TicketsApi.createTicket({
+			const response = await FlightTicketsApi.createTicket({
 				...rest,
 				departureDate: data.departureDate.toISOString(),
 				arrivalDate: data.arrivalDate.toISOString(),
 				ticketType:
-					ticketType?.id == 1 ? ETicketType.Charters : ETicketType.Systematic,
+					ticketType?.id == 1
+						? EFlightTicketType.Charters
+						: EFlightTicketType.Systematic,
 				airlineId: airline!.id,
 				class:
 					data.class!.id == 1 ? EFlightClass.Economy : EFlightClass.Buisiness,

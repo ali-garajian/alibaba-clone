@@ -18,7 +18,11 @@ import {
 	FieldErrors,
 } from 'react-hook-form';
 import clsx from 'clsx';
-import { FormTextInput, FormComboBox, Conditional } from '@alibaba-clone/core';
+import {
+	FormTextInput,
+	FormComboBox,
+	Conditional,
+} from '@alibaba-clone/core-ui-web';
 
 import { ESex, IPassengersForm } from '..';
 import useStore, { ISearchOptionsSlice } from 'data/Store';

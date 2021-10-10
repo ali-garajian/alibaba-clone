@@ -1,11 +1,11 @@
-import { EFlightClass, ETicketType } from '@alibaba-clone/core';
+import { EFlightClass, EFlightTicketType } from '@alibaba-clone/core';
 import { StateCreator } from 'zustand';
 
 export interface IFiltersSlice {
 	departure: number[];
 	setDeparture(v: number[]): void;
 
-	ticketTypes: Record<ETicketType, boolean>;
+	ticketTypes: Record<EFlightTicketType, boolean>;
 	setTicketTypes(name: string, value: boolean): void;
 
 	airlines: number[];

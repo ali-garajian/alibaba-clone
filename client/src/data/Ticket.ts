@@ -1,27 +1,31 @@
 import { StateCreator } from 'zustand';
 import {
-	ITicket,
+	IFlightTicket,
 	IGetClientTicketListResponse,
 	ApiResponseContent,
 } from '@alibaba-clone/core';
 
 export interface ITicketSlice {
-	selectedTicket: ITicket | null;
-	setSelectedTicket(v: ITicket | null): void;
+	selectedFlightTicket: IFlightTicket | null;
+	setSelectedFlightTicket(v: IFlightTicket | null): void;
 
-	ticketListData: ApiResponseContent<IGetClientTicketListResponse> | null;
-	setTicketListData(v: ApiResponseContent<IGetClientTicketListResponse>): void;
+	flightTicketListData: ApiResponseContent<
+		IGetClientTicketListResponse<IFlightTicket>
+	> | null;
+	setFlightTicketListData(
+		v: ApiResponseContent<IGetClientTicketListResponse<IFlightTicket>>
+	): void;
 }
 
 const createTicketSlice: StateCreator<ITicketSlice> = (set) => ({
-	selectedTicket: null,
-	setSelectedTicket(v) {
-		set({ selectedTicket: v });
+	selectedFlightTicket: null,
+	setSelectedFlightTicket(v) {
+		set({ selectedFlightTicket: v });
 	},
 
-	ticketListData: null,
-	setTicketListData(v) {
-		set({ ticketListData: v });
+	flightTicketListData: null,
+	setFlightTicketListData(v) {
+		set({ flightTicketListData: v });
 	},
 });
 

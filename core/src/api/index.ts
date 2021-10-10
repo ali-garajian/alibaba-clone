@@ -1,5 +1,6 @@
 export * from './_base'
 export { default as AuthApi } from './auth'
 export { default as CitiesApi } from './cities'
-export { default as TicketsApi } from './tickets'
 export { default as AirlineApi } from './airline'
+export { default as FlightTicketsApi } from './flightTicket'
+export { default as TrainTicketsApi } from './trainTicket'

@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import shallow from 'zustand/shallow';
 import debounce from 'lodash/debounce';
-import { TicketsApi } from '@alibaba-clone/core';
+import { FlightTicketsApi } from '@alibaba-clone/core';
 
 import useStore, {
 	ISearchOptionsSlice,
@@ -10,7 +10,7 @@ import useStore, {
 } from 'data/Store';
 import _CACHE from 'data/_CACHE';
 import { ESortingCriterias } from 'data/Sorting';
-import { ITicket } from '@alibaba-clone/core';
+import { IFlightTicket } from '@alibaba-clone/core';
 
 const searchOptionsSelector = (state: ISearchOptionsSlice) =>
 	[
@@ -33,7 +33,7 @@ export const filtersAndSortsSelector = (state: RootState) =>
 	] as const;
 
 const ticketListDataSelector = (state: ITicketSlice) =>
-	[state.ticketListData, state.setTicketListData] as const;
+	[state.flightTicketListData, state.setFlightTicketListData] as const;
 
 export default function useTicketListData() {
 	const [source, destination, departureDate, returnDate, adult, child, infant] =
@@ -67,7 +67,7 @@ export default function useTicketListData() {
 					},
 				});
 			} else {
-				const response = await TicketsApi.getClientTicketListData({
+				const response = await FlightTicketsApi.getClientTicketListData({
 					source,
 					destination,
 					departureDate: departureDate.toISOString(),
@@ -105,7 +105,7 @@ export default function useTicketListData() {
 			tickets,
 			filtersAndSorts,
 		}: {
-			tickets?: ITicket[];
+			tickets?: IFlightTicket[];
 			filtersAndSorts: any;
 		}) => {
 			if (!tickets) return;

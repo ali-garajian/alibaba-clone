@@ -8,10 +8,10 @@ import {
 import { format } from 'date-fns-jalali';
 import {
 	MoneyFormat,
-	ETicketType,
-	ITicket,
-	Conditional,
+	EFlightTicketType,
+	IFlightTicket,
 } from '@alibaba-clone/core';
+import { Conditional } from '@alibaba-clone/core-ui-web';
 
 import useStyles from './styles';
 import { ISearchOptionsSlice } from 'data/SearchOptions';
@@ -21,7 +21,7 @@ import TicketCost from '../TicketCost';
 const passengersSelector = (state: ISearchOptionsSlice) => state.passengers;
 
 interface ITicketProps {
-	ticket: ITicket;
+	ticket: IFlightTicket;
 	action: React.ReactNode;
 	defaultExpanded?: boolean;
 }
@@ -41,8 +41,8 @@ function Ticket({ ticket, action, defaultExpanded }: ITicketProps) {
 						<Box className={classes.ticketType}>
 							{
 								{
-									[ETicketType.Systematic]: 'سیستمی',
-									[ETicketType.Charters]: 'چارتر',
+									[EFlightTicketType.Systematic]: 'سیستمی',
+									[EFlightTicketType.Charters]: 'چارتر',
 								}[ticket.ticketType]
 							}
 						</Box>

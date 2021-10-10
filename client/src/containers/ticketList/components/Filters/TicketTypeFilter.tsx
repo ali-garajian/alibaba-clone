@@ -1,13 +1,13 @@
 import { FormGroup, FormControlLabel, Checkbox } from '@material-ui/core';
 import shallow from 'zustand/shallow';
-import { ETicketType } from '@alibaba-clone/core';
+import { EFlightTicketType } from '@alibaba-clone/core';
 
 import CustomAccordion from 'components/CustomAccordion';
 import useStore, { IFiltersSlice } from 'data/Store';
 
-const ticketTypeLabelMap: Record<ETicketType, string> = {
-	[ETicketType.Systematic]: 'سیستمی',
-	[ETicketType.Charters]: 'چارتر',
+const ticketTypeLabelMap: Record<EFlightTicketType, string> = {
+	[EFlightTicketType.Systematic]: 'سیستمی',
+	[EFlightTicketType.Charters]: 'چارتر',
 };
 
 const ticketTypeSelector = (state: IFiltersSlice) =>
@@ -27,24 +27,24 @@ function TicketTypeFilter({}: ITicketTypeFilterProps) {
 				<FormControlLabel
 					control={
 						<Checkbox
-							checked={checked[ETicketType.Systematic]}
+							checked={checked[EFlightTicketType.Systematic]}
 							onChange={handleChange}
-							name={ETicketType.Systematic}
+							name={EFlightTicketType.Systematic}
 							color="primary"
 						/>
 					}
-					label={ticketTypeLabelMap[ETicketType.Systematic]}
+					label={ticketTypeLabelMap[EFlightTicketType.Systematic]}
 				/>
 				<FormControlLabel
 					control={
 						<Checkbox
-							checked={checked[ETicketType.Charters]}
+							checked={checked[EFlightTicketType.Charters]}
 							onChange={handleChange}
-							name={ETicketType.Charters}
+							name={EFlightTicketType.Charters}
 							color="primary"
 						/>
 					}
-					label={ticketTypeLabelMap[ETicketType.Charters]}
+					label={ticketTypeLabelMap[EFlightTicketType.Charters]}
 				/>
 			</FormGroup>
 		</CustomAccordion>

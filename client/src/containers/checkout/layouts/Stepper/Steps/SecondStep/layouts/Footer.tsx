@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const dataSelector = (state: RootState) =>
-	[state.passengers, state.selectedTicket] as const;
+	[state.passengers, state.selectedFlightTicket] as const;
 
 function TicketInfo() {
 	const classes = useStyles();

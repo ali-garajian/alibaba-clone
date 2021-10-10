@@ -5,6 +5,8 @@ import {
     CreateNewTrainTicketRequest,
     DbTrainTicketModel,
     DbFlightTicketModel,
+    FlightTicketTableRepresentation,
+    TrainTicketTableRepresentation,
 } from './base'
 
 // GET /tickets/admin/:type
@@ -13,7 +15,13 @@ export interface IGetAdminTicketListQueryParams extends IPaginatedRequest {
     destination?: number
     departureDate?: string
 }
-export type GetAdminTicketListResponse = Array<TicketTableRepresentation>
+export type GetAdminFlightTicketListResponse =
+    Array<FlightTicketTableRepresentation>
+export type GetAdminTrainTicketListResponse =
+    Array<TrainTicketTableRepresentation>
+export type GetAdminTicketListResponse =
+    | GetAdminFlightTicketListResponse
+    | GetAdminTrainTicketListResponse
 
 // GET /ticktes/admin/:type
 export interface IDeleteTicketsRequest {
@@ -24,4 +32,8 @@ export interface IDeleteTicketsRequest {
 export type CreateNewTicketRequest =
     | CreateNewFlightTicketRequest
     | CreateNewTrainTicketRequest
-export type CreateNewTicketResponse = DbFlightTicketModel | DbTrainTicketModel
+export type CreateNewFlightTicketResponse = DbFlightTicketModel
+export type CreateNewTrainTicketResponse = DbTrainTicketModel
+export type CreateNewTicketResponse =
+    | CreateNewFlightTicketResponse
+    | CreateNewTrainTicketResponse

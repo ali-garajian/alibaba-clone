@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const dataSelector = (state: RootState) =>
-	[state.passengersInfo, state.selectedTicket] as const;
+	[state.passengersInfo, state.selectedFlightTicket] as const;
 
 function PassengersInfo() {
 	const classes = useStyles();
