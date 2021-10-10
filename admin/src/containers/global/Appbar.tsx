@@ -22,7 +22,8 @@ import {
 import shallow from 'zustand/shallow';
 import clsx from 'clsx';
 import { useHistory } from 'react-router-dom';
-import { AuthApi, isAuthenticated, Gap } from '@alibaba-clone/core';
+import { AuthApi, isAuthenticated } from '@alibaba-clone/core';
+import { Gap } from '@alibaba-clone/core-ui-web';
 
 import { RoutesList } from 'routes/routesList';
 import { IApplicationSlice } from 'data/application';

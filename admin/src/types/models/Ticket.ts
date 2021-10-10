@@ -1,8 +1,8 @@
-import { ITicket } from '@alibaba-clone/core';
-import { ComboEntry } from 'components/ComboBox';
+import { IFlightTicket } from '@alibaba-clone/core';
+import { ComboEntry } from '@alibaba-clone/core-ui-web';
 
 export type AddTicketForm = Pick<
-	ITicket,
+	IFlightTicket,
 	'airplane' | 'permittedLoggage' | 'terminalNumber' | 'price' | 'quantity'
 > &
 	Record<

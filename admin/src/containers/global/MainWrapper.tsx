@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { CssBaseline, Box, makeStyles, Theme } from '@material-ui/core';
 import shallow from 'zustand/shallow';
-import { isAuthenticated, Conditional } from '@alibaba-clone/core';
+import { isAuthenticated } from '@alibaba-clone/core';
+import { Conditional } from '@alibaba-clone/core-ui-web';
 
 import AppProviders from 'providers';
 import Appbar from './Appbar';

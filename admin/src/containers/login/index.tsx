@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { Box, TextField } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import {
-	AuthApi,
-	isAuthenticated,
-	sanitizeEmail,
-	CustomButton,
-} from '@alibaba-clone/core';
+import { AuthApi, isAuthenticated, sanitizeEmail } from '@alibaba-clone/core';
+import { CustomButton } from '@alibaba-clone/core-ui-web';
 
 import { RoutesList } from 'routes/routesList';
 import { IAuthSlice } from 'data/auth';
